@@ -5,6 +5,7 @@ getSport = function(){
     function(u){ return u.json();}
   ).then(
     function(json){
+      
       console.log(json);
     }
   )
