@@ -6,7 +6,7 @@ app.get('/', function(req, res){
   res.send('Hello World')
 })
 
-app.getElementsByClassName('/toto', function(req, res){
+app.get('/toto', function(req, res){
   res.send('Hello Toto')
 })
 
