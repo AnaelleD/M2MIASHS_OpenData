@@ -4,7 +4,7 @@
   "description": "Projet Opendata M2 MIASHS",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/AnaelleD/M2MIASHS_OpenData#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
   }
 }
