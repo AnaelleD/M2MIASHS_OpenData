@@ -21,13 +21,15 @@ app.get('/flag', function(req, res){
     //res.send(name) //affiche la liste des noms de pays
 
     //tirage au sort sans remise du noms des pays pour une session de quizz avec 10 questions
-    var nameQuestion = new Array();
-    var nameDispo = new Array();
-    for (i in name){
-      nameDispo.push(name[i]);
-    };
+  //  function (){
+      var nameQuestion = new Array();
+      var nameDispo = new Array();
+      for (i in flag){
+        nameDispo.push(flag[i]);
+      };
 
-    console.log(nameDispo)
+  //  }
+    //console.log(nameDispo)
 
     for (var i = 0; i<10; i++)
     	{
@@ -36,15 +38,18 @@ app.get('/flag', function(req, res){
     	nameQuestion[i] = nameDispo[tirage];
     	nameDispo.splice(tirage,1);
     };
-    console.log(nameDispo.length)
+    //console.log(nameDispo.length)
 
     //tirage au sort avec remise
     /*var nameQuestion = [];
     for (i=0; i<10; i++){
       nameQuestion[i] = Math.floor(Math.random()*name.length);
     };*/
+
     //console.log(nameQuestion);
     res.send(nameQuestion);
+
+
   });
 });
 
