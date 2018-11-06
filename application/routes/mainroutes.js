@@ -10,7 +10,7 @@ module.exports = function(app, express) {
     const mainRoutes = express.Router()
 
     mainRoutes.get('/', function(req, res) {
-    	request('http://www.omdbapi.com/?t=titanic&apikey=25f31d56' , function(eroor, response, body){
+    	request('http://www.omdbapi.com/?t=titanic&apikey=25f31d56' , function(error, response, body){
 			console.log(body)
 			jsonomdb = JSON.parse(body)
 			str = jsonomdb.Actors
