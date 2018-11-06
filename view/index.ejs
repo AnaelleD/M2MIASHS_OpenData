@@ -56,30 +56,7 @@
 </body>
 <script type="text/javascript">
 fetchSport = function(){
-fetch('/themeSport')
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Error. Status Code: ' +
-          response.status);
-        return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-				jsonListeSport = JSON.parse(body)
-				teams = jsonListeSport.teams
-				var listeTeam = []
-				for (iteam in teams){
-					listeTeam.push(teams[iteam].strTeam)
-				}
-				console.log(listeTeam)
-      });
-    }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
-}
+fetch('/themeSport.js').then(function(response) {console.log(response)})}
 </script>
 
 </html>
