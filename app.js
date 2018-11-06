@@ -10,14 +10,20 @@ const app = express()
 
 app.get('/flag', function(req, res){
   request('https://restcountries.eu/rest/v2/region/europe', function(error, reponse, body){
-    console.log(body)
-    res.send(body)
-    jsonflag = JSON.parse(body)
-    flag = jsonflag.flag
-    name = jsonflag.name
-    var lsflag = flag.split(",")
-    //var lsname = name.split(",")
-    console.log(lsflag[0])
+    //console.log(body)
+    //res.send(body)
+    var flag = [];
+    var name = [];
+
+    console.log(JSON.parse(body))
+    jsonFlag = JSON.parse(body)
+    for (i in jsonFlag) {
+    //  jsonflag = JSON.parse(body[i])
+      name.push(jsonFlag[i].name)
+      flag.push({ key: jsonFlag[i].name , value: jsonFlag[i].flag});
+    }
+    console.log(flag)
+    res.send(name)
   })
 })
 
