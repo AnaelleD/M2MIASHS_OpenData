@@ -1,17 +1,16 @@
-const express = require('express');
+const port     = process.env.PORT || 8080
 
+const express = require('express')
 const app = express()
 
-app.get('/', function(req, res){
-  res.send('Hello World')
-})
+const morgan       = require('morgan')
+app.use(morgan('dev')) // log every request to the console
 
-app.get('/toto', function(req, res){
-  res.send('Hello Toto')
-})
+app.set('view engine', 'ejs') // set up ejs for templating
 
-port = process.env.PORT || 8080
+// routes ======================================================================
+require('./application/routes/mainroutes.js')(app, express)
 
-app.listen(port, function(){
-  console.log('Exemple app listening on port' + port)
-})
+// launch ======================================================================
+app.listen(port)
+console.log('The magic happens on port ' + port)

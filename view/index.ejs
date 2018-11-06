@@ -1,0 +1,27 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>EHPAD Harvester</title>
+    <meta descr="pour récupérer des listing d'EHPAD">
+
+</head>
+<body>
+
+	<form>
+    	URL :
+    	<input type="text" name="url" value="<%=data.url%>"></input>
+    	<input type="submit" value="JSON" formaction="/json">
+        <input type="submit" value="CSV" formaction="/csv">
+    </form>
+
+
+    <div id="response">
+    	<%= data.error%> </br>
+    	status code : <%= data.statuscode%> </br>
+        data : <%= JSON.stringify(data.json)%>
+    </div>
+
+</body>
+</html>
