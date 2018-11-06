@@ -10,14 +10,9 @@ module.exports = function(app, express) {
     const mainRoutes = express.Router()
 
     mainRoutes.get('/', function(req, res) {
-    	request('http://www.omdbapi.com/?t=titanic&apikey=25f31d56' , function(eroor, response, body){
-			console.log(body)
-			jsonomdb = JSON.parse(body)
-			str = jsonomdb.Actors
-			var splt = str.split(",")
-			console.log(splt[0])
+			res.render('index')
 		})
-    })
+
 
    
 	// apply the routes to our application
