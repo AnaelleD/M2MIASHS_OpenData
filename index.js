@@ -12,4 +12,4 @@ require('./application/routes/mainroutes_Rym.js')(app, express) //récupérer le
 
 // launch ======================================================================
 app.listen(port)
-console.log('The magic happens on port ' + port)
+console.log('And the magic happens on port ' + port)
