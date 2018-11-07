@@ -9,7 +9,7 @@ app.set('views', './view')
 app.set('view engine', 'ejs') // set up ejs for templating
 
 // routes ======================================================================
-require('./application/routes/mainroutes_Rym.js')(app, express) //récupérer le fichier qui contient la route (get + url de l'API)
+require('./application/routes/mainroutes.js')(app, express) //récupérer le fichier qui contient la route (get + url de l'API)
 
 // launch ======================================================================
 app.listen(port)
