@@ -9,13 +9,6 @@ module.exports = function(app, express) {
     mainRoutes.get('/', function(req, res) {
 			res.render('index')
 		})
-	mainRoutes.get('/thememusic.js', function(req, res) {
-        fs.readFile("JS/thememusic.js", function(err, data) {
-            res.writeHead(200, {'Content-Type': 'text/plain'})
-            res.write(data)
-            res.end()
-        })
-    })
 
     ////////// Liste des requetes
     // Theme Sport
