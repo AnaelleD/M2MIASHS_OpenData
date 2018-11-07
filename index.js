@@ -6,7 +6,8 @@ const app = express()
 const morgan       = require('morgan')
 app.use(morgan('dev')) // log every request to the console
 
-//app.set('view engine', 'ejs') // set up ejs for templating
+app.set('views', './view')
+app.set('view engine', 'ejs') // set up ejs for templating
 
 // routes ======================================================================
 require('./application/routes/mainroutes.js')(app, express)
