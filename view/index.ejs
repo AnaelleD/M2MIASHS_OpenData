@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/fetch"></script>
+    <script src="/fetchSport"></script>
   </head>
 
   <body style="background-color:#2d2d30">
@@ -17,7 +19,7 @@
     </div>
 
     <div class="text-center">
-       <button type="button" class="btn btn-default" id="1" onclick="fetchSport();">Theme1</button>
+       <button type="button" class="btn btn-default" id="1" onclick="fetchBoutton('Sport');">Theme1</button>
       <button type="button" class="btn btn-default" id="2">Theme2</button>
       <button type="button" class="btn btn-default" id="3">Theme3</button>
       <button type="button" class="btn btn-default" id="4">Theme4</button>
@@ -28,12 +30,12 @@
     <div class="container">
       <div class="well well-lg">
         <div class="row">
-  
+
           <div class="col-sm-6">
             <h3 class="text-center" >Question</h3>
             <div id="Question"></div>
           </div>
-    
+
           <div class="col-sm-6">
             <h3 class="text-center">Réponse</h3>
             <div id="Reponse"></div>
@@ -44,15 +46,8 @@
       </div>
     </div>
 
-
     <h2 style="margin-left:80% ;color:white">Score : <span id="score" class="label label-warning" >0</span></h2>
 
-
   </body>
-
-  <script type="text/javascript">
-    fetchSport = function(){
-      fetch('/themeSport.js').then(function(response) {console.log(response)})}
-  </script>
 
 </html>
