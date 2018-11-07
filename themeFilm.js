@@ -1,6 +1,5 @@
 const request = require('request') // appeler le module "request"
 const Film = {} 
-const acteurs = require('./actrices_acteurs.json') // appeler le fichier actrices_acteurs.json contenant les noms d'acteurs qui vont servir au tirage aléatoire
 const titresfilms = require('./titres_films.json') // appeler le fichier titres_films.json contenant les titres de films qui vont servir au tirage aléatoire de titre de film
 
 Film.getFilm = function(cptFilm, mesfilms, res)
