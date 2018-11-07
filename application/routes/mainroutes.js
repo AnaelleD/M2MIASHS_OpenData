@@ -39,8 +39,8 @@ module.exports = function(app, express) {
     })
 
     // Theme Flag
-    mainRoutes.get('/requestSport' , function(req, res) {
-      request('https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=France' ,
+    mainRoutes.get('/requestFlag' , function(req, res) {
+      request('https://restcountries.eu/rest/v2/region/europe' ,
         function(error, response, body){
             var json = JSON.parse(body)
             res.send(json)
