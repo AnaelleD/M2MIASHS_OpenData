@@ -22,11 +22,11 @@
     </div>
 
     <div class="text-center">
-       <button type="button" class="btn btn-default" onclick="fetchBoutton('Sport');">Sport</button>
-      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Sport');">Cinema</button>
-      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Sport');">Musique</button>
-      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Sport');">Drapeau</button>
-      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Sport');">Jeux Vidéo</button>
+       <button type="button" class="btn btn-default" id="1" onclick="fetchBoutton('Sport');">Sport</button>
+      <button type="button" class="btn btn-default" id="2">Cinema</button>
+      <button type="button" class="btn btn-default" id="3">Musique</button>
+      <button type="button" class="btn btn-default" id="4">Drapeau</button>
+      <button type="button" class="btn btn-default" id="5">Jeux Vidéo</button>
     </div>
 
     <br>
