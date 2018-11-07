@@ -34,7 +34,7 @@ app.get('/flag', function(req, res){
 
 
     console.log(falseNameDispo);
-    console.log(nameQuestion);
+    //console.log(nameQuestion);
     res.send(nameQuestion);
   });
 });
