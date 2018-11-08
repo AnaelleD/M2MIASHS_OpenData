@@ -8,26 +8,21 @@ fetchGames = function(){
 			var publisher = [];
 			var logo= [];
 		
-		for (i in json.results.bindings) {
-          publisher.push(json.results.bindings[i].publisherLabel.value);
-          logo.push({ question: json.results.bindings[i].logo.value, reponse: json.results.bindings[i].publisherLabel.value});
-        };
+			for (i in json.results.bindings) {
+			  publisher.push(json.results.bindings[i].label.value);
+			  logo.push({ question: json.results.bindings[i].logo.value, reponse: json.results.bindings[i].label.value});
+			};
+			
+		var game = []
+		var listLogo = [...Array(logo.length).keys()];
+		var listId = getRandomArbitrary(listLogo,10); 
+		var false1 = [];
+		var false2 = [];
 		
-		//console.log(publisher)
-		//console.log(logo)
+		
+		//console.log(logo);
+        console.log(listLogo);
+		console.log(listId);
 
-		fetch('/requestGames2').then(function(response) {
-			if (!response.ok){
-				console.log("Erreur du fetch vers /requestGames2")
-			}
-			else{
-				return response.json().then(function(json){
-					var urlList = [];
-					const url = "https://www.wikidata.org/entity/"
-					for(i in publisher){
-						urlList.push(url+publisher[i])
-					}
-		})
-	  }
 	})
-}
+}})}
