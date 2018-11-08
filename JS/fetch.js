@@ -10,6 +10,9 @@ function fetchBoutton(theme){
   }
   else if (theme == "Flag"){
     fetchFlag()
+	  }
+  else if (theme == "Games"){
+    fetchGames()
   }else{
     console.log("erreur")
   }
