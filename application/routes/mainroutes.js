@@ -1,5 +1,6 @@
 const request = require('request')
 const fs = require('fs')
+const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
@@ -30,23 +31,27 @@ module.exports = function(app, express) {
     })
 
     // Theme Cinema
-    mainRoutes.get('/requestSport' , function(req, res) {
-      request('https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=France' ,
-        function(error, response, body){
-            var json = JSON.parse(body)
-            res.send(json)
-            })
+    mainRoutes.get('/requestCinema' , function(req, res) {
+      film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js 
     })
 
     // Theme Flag
-    mainRoutes.get('/requestSport' , function(req, res) {
-      request('https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=France' ,
+    mainRoutes.get('/requestFlag' , function(req, res) {
+      request('https://restcountries.eu/rest/v2/region/europe' ,
         function(error, response, body){
             var json = JSON.parse(body)
             res.send(json)
             })
     })
-
+        
+    // Theme Games
+    mainRoutes.get('/requestGames' , function(req, res) {
+      request('https://query.wikidata.org/sparql?query=SELECT%20%3Fgame%20%3FgameLabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22.%20%7D%0A%20%20%3Fgame%20wdt%3AP31%20wd%3AQ7889.%0A%7DLIMIT%20100&format=json' ,
+        function(error, response, body){
+            var json = JSON.parse(body)
+            res.send(json)
+            })
+    })
 
     /////////////// livre un fichier js client
     // Global, Animation, Modif DOM
@@ -94,9 +99,15 @@ module.exports = function(app, express) {
   })
   })
 
-
+  // Theme Games
+  mainRoutes.get('/fetchGames', function(req, res) {
+    fs.readFile("JS/fetchGames.js", function(err, data) {
+     res.writeHead(200, {'Content-Type': 'text/plain'})
+     res.write(data)
+     res.end()
+  })
+  })
 
 	/////////////// apply the routes to our application
     app.use('/', mainRoutes)
-
 }
