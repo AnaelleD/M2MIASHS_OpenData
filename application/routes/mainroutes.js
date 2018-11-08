@@ -1,6 +1,6 @@
 const request = require('request')
 const fs = require('fs')
-const film = require('../../themefilm.js') // appeler le fichier themefil.js
+const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
