@@ -1,5 +1,6 @@
 const request = require('request')
 const fs = require('fs')
+const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
@@ -30,12 +31,8 @@ module.exports = function(app, express) {
     })
 
     // Theme Cinema
-    mainRoutes.get('/requestSport' , function(req, res) {
-      request('https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=France' ,
-        function(error, response, body){
-            var json = JSON.parse(body)
-            res.send(json)
-            })
+    mainRoutes.get('/requestCinema' , function(req, res) {
+      film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js 
     })
 
     // Theme Flag
