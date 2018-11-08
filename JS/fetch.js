@@ -1,30 +1,43 @@
-fetchSuivant = function (i,DATA){
-	var DATA=DATA;
+fetchSuivant = function (i,DATA,SCORE,REP){
+	TREP=['ABC'];	
+	if (REP==TREP[0]){
+		document.getElementsByClassName('well-lg')[0].style["background-color"]='lightgreen'
+		}
+		else if (REP=='start') {
+			document.getElementsByClassName('well-lg')[0].style["background-color"]=''
+		}
+		else {
+			document.getElementsByClassName('well-lg')[0].style["background-color"]='red'
+		}
+	setTimeout(function() {
+	
+	if (REP==TREP[0]) {SCORE+=1;document.getElementById("SCORE").innerHTML=SCORE;}
+		
+	REP=['ABC','BCD','EFG'];
 	var QUEST="<h1> #"+i+"</h1>";
 	document.getElementById("Question").innerHTML=QUEST;
+	i+=1;
 
-	var REP = ''+
+	var CHOIX = ''+
 	'<div class="custom-radios">'+
-  		'<div><input type="radio" id="color-1" name="color" value="color-1" ><label for="color-1">'+
+  		'<div><input type="radio" id="A" name="color" value="1" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[0]+'")><label for="A">'+
      ' <span>REPONSE A</span></label>'+
      '</div>'+  
      '<div>'+
-   		 '<input type="radio" id="color-1" name="color" value="color-1" ><label for="color-1">'+
+   		 '<input type="radio" id="2" name="color" value="2" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[1]+'")><label for="2">'+
      ' <span>REPONSE B</span></label>'+
      '</div>'+
      '<div>'+
-   		 '<input type="radio" id="color-1" name="color" value="color-1" ><label for="color-1">'+
+   		 '<input type="radio" id="3" name="color" value="3" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[2]+'")><label for="3">'+
      ' <span>REPONSE C</span></label>'+
      '</div>'+
      '</div>';
-
+	document.getElementById("Reponse").innerHTML=CHOIX;
 	
-	document.getElementById("Reponse").innerHTML=REP;
-		i+=1;
-	if(i<=10){
-		document.getElementById("Suivant").setAttribute( "onClick","fetchSuivant("+i+","+DATA+")");
-		console.log(i)
-	}
+	
+	document.getElementsByClassName('well-lg')[0].style["background-color"]=''
+	},800)
+	//document.getElementById("Suivant").setAttribute( "onClick","fetchSuivant("+i+","+DATA+","+SCORE+")");
 }
 
 function fetchBoutton(theme){
@@ -33,17 +46,17 @@ var DATA="";
  	DATA=fetchSport()
   }
   else if (theme == "Music"){
-    fetchMusic()
+    DATA=fetchMusic()
   }
   else if (theme == "Cinema"){
-    fetchCinema()
+   DATA= fetchCinema()
   }
   else if (theme == "Flag"){
-    fetchFlag()
+    DATA=fetchFlag()
   }else{
     console.log("erreur")
   };
 	var i=0;
-	fetchSuivant(0,DATA);
+	fetchSuivant(0,DATA,0,"start");
 }
 
