@@ -10,7 +10,7 @@
     <script src="/stats"></script>
   </head>
 
-  <body style="background-color:#2d2d30">
+  <body style="background-color:#2d2d30" onload="fetchDB()">
 
     <div class="jumbotron text-center">
       <h1>G ou G pas ?</h1>
@@ -39,6 +39,14 @@
       </div>
     </div>
 
-  </body>
+  <script>
+    fetchDB = function(){
+      fetch('/stats').then(function(response) {
+        console.log(response.json())
+      }
+    )}
+  </script>
 
+  </body>
+  
 </html>

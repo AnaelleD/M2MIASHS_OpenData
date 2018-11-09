@@ -12,8 +12,7 @@ module.exports = function(app, express) {
 
     // Index.html
     mainRoutes.get('/', function(req, res) {
-			//res.render('index')
-      res.render('stats')
+			res.render('index')
 		})
 
     ////////// Liste des requetes
