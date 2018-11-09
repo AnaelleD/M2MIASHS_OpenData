@@ -1,5 +1,10 @@
 const request = require('request')
 const fs = require('fs')
+const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
+
+const mongo = require('mongodb')
+//load up the scores model
+const Score = require('../models/score')
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
@@ -7,7 +12,8 @@ module.exports = function(app, express) {
 
     // Index.html
     mainRoutes.get('/', function(req, res) {
-			res.render('index')
+			//res.render('index')
+      res.render('stats')
 		})
 
     ////////// Liste des requetes
@@ -30,12 +36,8 @@ module.exports = function(app, express) {
     })
 
     // Theme Cinema
-    mainRoutes.get('/requestSport' , function(req, res) {
-      request('https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=France' ,
-        function(error, response, body){
-            var json = JSON.parse(body)
-            res.send(json)
-            })
+    mainRoutes.get('/requestCinema' , function(req, res) {
+      film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js
     })
 
     // Theme Flag
@@ -46,7 +48,7 @@ module.exports = function(app, express) {
             res.send(json)
             })
     })
-        
+
     // Theme Games
     mainRoutes.get('/requestGames' , function(req, res) {
 		request('https://query.wikidata.org/sparql?query=SELECT%20%3Flogo%20%3Flabel%20WHERE%20%7B%0A%20%20%3Fgame%20wdt%3AP31%20wd%3AQ7889.%0A%20%20%3Fgame%20wdt%3AP154%20%3Flogo.%0A%20%20%3Fgame%20wdt%3AP123%20%3Fpublisher.%0A%20%20%3Fpublisher%20rdfs%3Alabel%20%3Flabel.%0A%20%20FILTER(lang(%3Flabel)%3D%27en%27)%0A%7D&format=json',
@@ -55,6 +57,45 @@ module.exports = function(app, express) {
 				res.send(json)
 				})
 	})
+
+    /////////////// Notre API
+    // API Get
+    mainRoutes.get('/stats', function(req, res) {
+      Score.find({"theme" : "Flag"},{"nickname": true,
+        "theme": true,
+        "score": true,
+        "age": true,
+        "sexe": true},function(err, scores){
+        console.log(scores);
+        if (err){
+            res.send(err);
+        }
+        if (res){
+          res.json(scores);
+          console.log(scores);
+        }
+      });
+    })
+
+    // API Post
+    mainRoutes.post(function(req,res){
+    // Nous utilisons le schéma Score
+      var score = new Score();
+    // Nous récupérons les données reçues pour les ajouter à l'objet Score
+      score.nickname = req.body.nickname;
+      score.theme = req.body.theme;
+      score.score = req.body.score;
+      score.age = req.body.age;
+      score.sexe = req.body.sexe;
+    //Nous stockons l'objet en base
+      score.save(function(err){
+        if(err){
+          res.send(err);
+        }
+        res.send({message : 'Score enregistré'});
+      })
+    })
+
 
     /////////////// livre un fichier js client
     // Global, Animation, Modif DOM
