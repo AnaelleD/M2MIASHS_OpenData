@@ -29,10 +29,10 @@ fetchGames = function(){
             var listSubId =  [...Array(listLogo.length).keys()];
             listSubId.splice(listId[i], 1);
             var lesFaux = getRandomArbitrary(listSubId,2)
-            listFalse1.push(json.results.bindings[listSubId[lesFaux[0]]].label.value)
-            listFalse2.push(json.results.bindings[listSubId[lesFaux[1]]].label.value)
-          }
-		  
+			listFalse1.push(json.results.bindings[lesFaux[0]].label.value);
+			listFalse2.push(json.results.bindings[lesFaux[1]].label.value);
+		}
+		
 		var jsonArray = [];
           for (i = 0; i < listId.length; i++) {
             var question = listQuestion[i]
