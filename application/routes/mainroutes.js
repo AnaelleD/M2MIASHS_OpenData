@@ -4,7 +4,7 @@ const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 
 const mongo = require('mongodb')
 //load up the scores model
-const Scores = require('../models/scores')
+const Score = require('../models/score')
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
@@ -61,7 +61,12 @@ module.exports = function(app, express) {
     /////////////// Notre API
     // API Get
     mainRoutes.get('/stats', function(req, res) {
-      Scores.find(function(err, scores){
+      Score.find({"theme" : "Flag"},{"nickname": true,
+        "theme": true,
+        "score": true,
+        "age": true,
+        "sexe": true},function(err, scores){
+        console.log(scores);
         if (err){
             res.send(err);
         }
@@ -74,8 +79,8 @@ module.exports = function(app, express) {
 
     // API Post
     mainRoutes.post(function(req,res){
-    // Nous utilisons le schéma Scores
-      var score = new Scores();
+    // Nous utilisons le schéma Score
+      var score = new Score();
     // Nous récupérons les données reçues pour les ajouter à l'objet Score
       score.nickname = req.body.nickname;
       score.theme = req.body.theme;

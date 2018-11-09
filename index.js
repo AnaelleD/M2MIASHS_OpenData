@@ -10,12 +10,7 @@ app.set('views', './view')
 app.set('view engine', 'ejs') // set up ejs for templating
 
 // configuration ===============================================================
-const db = mongoose.createConnection(configDB.url)
-
-db.on('error', console.error.bind(console, 'Erreur lors de la connexion à Mlab'));
-db.once('open', function (){
-    console.log("Connexion à la base OK");
-});
+//const db = mongoose.createConnection(configDB.url)
 
 // routes ======================================================================
 require('./application/routes/mainroutes.js')(app, express) //récupérer le fichier qui contient la route (get + url de l'API)
