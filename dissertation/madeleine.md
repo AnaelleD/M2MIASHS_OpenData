@@ -30,3 +30,4 @@ Dans un monde de plus en plus connecté où la quantité de données explose et 
 * [1]: <https://fr.wikipedia.org/wiki/Interop%C3%A9rabilit%C3%A9_en_informatique>
 * [2]: <https://openweb.eu.org/articles/pourquoi_standards>
 * [3]: <https://fr.wikipedia.org/wiki/Science_des_donn%C3%A9es>
+http://google.fr
