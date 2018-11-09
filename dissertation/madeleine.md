@@ -27,7 +27,8 @@ Comme nous venons de le définir, les données sont la matière première du Dat
 Dans un monde de plus en plus connecté où la quantité de données explose et les moyens d'accès au web aussi, l'interopérabilité confirme sa position d'enjeu majeur pour garantir une expérience utilisateur homogène. L'initiative de Tim Berners-Lee, au début des années 90, de définir des normes et standards pour encadrer et guider le développement du web fut visionnaire. Sans cela, nous assiterions à une balkanisation du web comme cela fut le cas au début de son histoire avec MSIE et Netscape [2]. Les échanges de données en seraient forcément moins riches et complets qu'actuellement. Si nous nous placons du point de vue du Data Scientist, l'interopérabilité est la pierre d'achoppement de son travail. Sans elle, son travail serait davantage complexifié, puisqu'il se nourrit des données glanées à travers une multitude de systèmes informatiques.
 
 # Références
-* [1]: <https://fr.wikipedia.org/wiki/Interop%C3%A9rabilit%C3%A9_en_informatique>
-* [2]: <https://openweb.eu.org/articles/pourquoi_standards>
-* [3]: <https://fr.wikipedia.org/wiki/Science_des_donn%C3%A9es>
-http://google.fr
+ [1]: <https://fr.wikipedia.org/wiki/Interop%C3%A9rabilit%C3%A9_en_informatique>
+
+ [2]: <https://openweb.eu.org/articles/pourquoi_standards>
+
+ [3]: <https://fr.wikipedia.org/wiki/Science_des_donn%C3%A9es>
