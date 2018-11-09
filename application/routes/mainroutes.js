@@ -59,8 +59,9 @@ module.exports = function(app, express) {
 
     /////////////// Notre API
     // API Get
-    mainRoutes.get('/stats', function(req, res) {
-      Score.find({"theme" : "Flag"},{"nickname": true,
+    mainRoutes.get('/score', function(req, res) {
+      theme = req.query.theme;
+      Score.find({"theme" : theme},{"nickname": true,
         "theme": true,
         "score": true,
         "age": true,
@@ -77,15 +78,17 @@ module.exports = function(app, express) {
     })
 
     // API Post
-    mainRoutes.post(function(req,res){
+    mainRoutes.post('/score', function(req,res){
+      console.log('Received a post on /score')
+      body = req.body
     // Nous utilisons le schéma Score
       var score = new Score();
     // Nous récupérons les données reçues pour les ajouter à l'objet Score
-      score.nickname = req.body.nickname;
-      score.theme = req.body.theme;
-      score.score = req.body.score;
-      score.age = req.body.age;
-      score.sexe = req.body.sexe;
+      score.nickname = body.nickname;
+      score.theme = body.theme;
+      score.score = body.score;
+      score.age = body.age;
+      score.sexe = body.sexe;
     //Nous stockons l'objet en base
       score.save(function(err){
         if(err){
@@ -145,6 +148,15 @@ module.exports = function(app, express) {
   // Theme Games
   mainRoutes.get('/fetchGames', function(req, res) {
     fs.readFile("JS/fetchGames.js", function(err, data) {
+     res.writeHead(200, {'Content-Type': 'text/plain'})
+     res.write(data)
+     res.end()
+  })
+  })
+
+  // monAPI
+  mainRoutes.get('/monAPI', function(req, res) {
+    fs.readFile("JS/monAPI.js", function(err, data) {
      res.writeHead(200, {'Content-Type': 'text/plain'})
      res.write(data)
      res.end()
