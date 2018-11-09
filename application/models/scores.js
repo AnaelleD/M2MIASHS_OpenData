@@ -1,15 +1,14 @@
-/ app/models/scores.js
 // load the things we need
 const mongoose = require('mongoose')
 const bcrypt   = require('bcrypt-nodejs')
 
 // define the schema for our scores model
 const scoresSchema = mongoose.Schema({
-        nickname     : String,
-        theme        : String,
-        score        : Number,
-        age     : Number,
-        sexe    : String,
+        nickname: String,
+        theme: String,
+        score: Number,
+        age: Number,
+        sexe: String,
     })
 
 // create the model for users and expose it to our app

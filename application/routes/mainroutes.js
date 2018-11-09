@@ -2,13 +2,18 @@ const request = require('request')
 const fs = require('fs')
 const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 
+const mongo = require('mongodb')
+//load up the scores model
+const Scores = require('../models/scores')
+
 module.exports = function(app, express) {
     // get an instance of the router for main routes
     const mainRoutes = express.Router()
 
     // Index.html
     mainRoutes.get('/', function(req, res) {
-			res.render('index')
+			//res.render('index')
+      res.render('stats')
 		})
 
     ////////// Liste des requetes
@@ -32,7 +37,7 @@ module.exports = function(app, express) {
 
     // Theme Cinema
     mainRoutes.get('/requestCinema' , function(req, res) {
-      film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js 
+      film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js
     })
 
     // Theme Flag
@@ -43,7 +48,7 @@ module.exports = function(app, express) {
             res.send(json)
             })
     })
-        
+
     // Theme Games
     mainRoutes.get('/requestGames' , function(req, res) {
       request('https://query.wikidata.org/sparql?query=SELECT%20%3Fgame%20%3FgameLabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22.%20%7D%0A%20%20%3Fgame%20wdt%3AP31%20wd%3AQ7889.%0A%7DLIMIT%20100&format=json' ,
@@ -52,6 +57,40 @@ module.exports = function(app, express) {
             res.send(json)
             })
     })
+
+    /////////////// Notre API
+    // API Get
+    mainRoutes.get('/stats', function(req, res) {
+      Scores.find(function(err, scores){
+        if (err){
+            res.send(err);
+        }
+        if (res){
+          res.json(scores);
+          console.log(scores);
+        }
+      });
+    })
+
+    // API Post
+    mainRoutes.post(function(req,res){
+    // Nous utilisons le schéma Scores
+      var score = new Scores();
+    // Nous récupérons les données reçues pour les ajouter à l'objet Score
+      score.nickname = req.body.nickname;
+      score.theme = req.body.theme;
+      score.score = req.body.score;
+      score.age = req.body.age;
+      score.sexe = req.body.sexe;
+    //Nous stockons l'objet en base
+      score.save(function(err){
+        if(err){
+          res.send(err);
+        }
+        res.send({message : 'Score enregistré'});
+      })
+    })
+
 
     /////////////// livre un fichier js client
     // Global, Animation, Modif DOM
