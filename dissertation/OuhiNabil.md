@@ -1,11 +1,11 @@
-### Ouhi Nabil / Novembre 2018 / OpenData
+#### Ouhi Nabil / Novembre 2018 / OpenData
 
 L'interopérabilité
 ====================
 
 ## 1. Qu'est ce que l'interopérabilité
 > **Interopérabilité :** *"est la capacité que possède un produit ou un système, dont les interfaces sont intégralement connues, à fonctionner avec d’autres produits ou systèmes existants ou futurs et ce sans restriction d’accès ou de mise en œuvre"*
-[définition Wikipedia](https://fr.wikipedia.org/wiki/Interop%C3%A9rabilit%C3%A9)
+[Wikipedia](https://fr.wikipedia.org/wiki/Interop%C3%A9rabilit%C3%A9)
 
 En parti composé du relatif spatial : **inter** soit ce qui caractérise une relation entre deux ou plusieurs éléments ou phénomènes, et s'oppose à intra. Et composé de l'adjectif **opérable**, autrement dit de ce qui peut être opérer.
 
@@ -26,7 +26,7 @@ Le *World Wide Web*, autrement dit (par simplification) : "le web"  est un bon e
 Il est même **nécessaire** d'avoir de l'interopérabilité dans le web car le fait que le web est constitué d'un ensemble de système qui fonctionne différemment des un des autres et qui ont parfois des langages différents et des fonctionnements différents, conditionne le web à être interopérable. Son engouement et son utilisation de plus en plus massive est due en grande partie par son interopérabilité. En gros, plus il y a des ordinateurs ( serveur ou client) qui communique facilement  entre eux (interopérable), plus il y a des personne qui utilise et partage sur ce réseau.
 
 J'aimerai, pour finir sur cette partie, mentioner le W3C :
->*La mission du World Wide Web Consortium (W3C) est de mener le Web à son plein potentiel en créant les normes techniques et >les directives grâce auxquelles le Web reste ouvert, accessible, et **interopérable**, pour chacun, partout.* 
+>*La mission du World Wide Web Consortium (W3C) est de mener le Web à son plein potentiel en créant les normes techniques et les directives grâce auxquelles le Web reste ouvert, accessible, et* interopérable *, pour chacun, partout.* 
 
 ## 3. Qu'est ce qu'apporte l'interopérabilité du web à un DataScientist ?
 
@@ -53,6 +53,8 @@ Manipuler des données dans le but d’en tirer une compréhension sur ce qu’e
 Interroger les données plutôt que les témoins est un art encore très peu pratiqué par les médias français, parce que cela suppose utiliser des outils informatique et mathématique complexe pour extraire de l’information d’immenses bases de données, par conséquence: l'utilisation de tableur excel et de saisie à la main sont des pratiques toujours d'actualité, parfois il est nécessaire d’utiliser des outils de gestion complexe et du coup passer par des formations pour acceder au données...
 
 Par contre exemple au Royaume-Unis, *Le Guardian* à mis en place des jeux de données centralisé dans une base unique et collaborative permettant plus facilement leur vérification et mise à jour. Une manière de faciliter l’accès aux données et donc d’industrialiser le travail, pour qu’un nombre plus important de journalistes puisse se lancer dans l’aventure.
+
+En conclusion, l'interopérabilité à toutes sont importance dans le web pour des questions techniques afin de faciliter la communication et le bon fonctionnement entre les differents systéme et le développement du web. Elle a aussi une place à jouer dans l'interprétation et l'analyse de l'information, autant plus dans le data-journalisme ou elle joue un role central entre les différents acteurs.
 
 
 ### Bibliographie
