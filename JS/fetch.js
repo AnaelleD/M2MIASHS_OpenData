@@ -52,7 +52,10 @@ var DATA="";
    DATA= fetchCinema()
   }
   else if (theme == "Flag"){
-    DATA=fetchFlag()
+    fetchFlag()
+	  }
+  else if (theme == "Games"){
+    fetchGames()
   }else{
     console.log("erreur")
   };
