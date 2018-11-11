@@ -56,7 +56,10 @@ fetchSport = function(){
             var leFaux2 = teamListe[listeFaux2[i]]
             jsonArray.push({question:laQuestion,reponse:laReponse,faux1:leFaux1,faux2:leFaux2})
           }
-          console.log(jsonArray)
+          //return jsonArray;
+          fetchSuivant(jsonArray);
+          
         })}
     })
   }
+  
