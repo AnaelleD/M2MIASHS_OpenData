@@ -1,55 +1,85 @@
-fetchSuivant = function (i,DATA,SCORE,REP){
-	TREP=['ABC'];	
-	if (REP==TREP[0]){
-		document.getElementsByClassName('well-lg')[0].style["background-color"]='lightgreen'
-		}
-		else if (REP=='start') {
-			document.getElementsByClassName('well-lg')[0].style["background-color"]=''
-		}
-		else {
-			document.getElementsByClassName('well-lg')[0].style["background-color"]='red'
-		}
-	setTimeout(function() {
-	
-	if (REP==TREP[0]) {SCORE+=1;document.getElementById("SCORE").innerHTML=SCORE;}
-		
-	REP=['ABC','BCD','EFG'];
-	var QUEST="<h1> #"+i+"</h1>";
-	document.getElementById("Question").innerHTML=QUEST;
-	i+=1;
+var SCORE=0;
 
-	var CHOIX = ''+
-	'<div class="custom-radios">'+
-  		'<div><input type="radio" id="A" name="color" value="1" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[0]+'")><label for="A">'+
-     ' <span>REPONSE A</span></label>'+
+fetchSuivant = function (DATA){
+	var CHOIX = '';
+	var QUEST= '';
+	
+	for (j=0;j<10;j++) {
+	Question = DATA[j].question
+	REPA= DATA[j].reponse
+	REPB= DATA[j].faux1
+	REPC= DATA[j].faux2
+	REP=[REPA,REPB,REPC];
+	TREP=[1,0,0];
+	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
+  		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
+     ' <span>'+REP[0]+'</span></label>'+
      '</div>'+  
      '<div>'+
-   		 '<input type="radio" id="2" name="color" value="2" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[1]+'")><label for="2">'+
-     ' <span>REPONSE B</span></label>'+
+   		 '<input type="radio" id="B" name="color" value="B" onclick=Suivant('+j+','+TREP[1]+')><label for="B">'+
+     ' <span>'+REP[1]+'</span></label>'+
      '</div>'+
      '<div>'+
-   		 '<input type="radio" id="3" name="color" value="3" onclick=fetchSuivant('+i+','+DATA+','+SCORE+',"'+REP[2]+'")><label for="3">'+
-     ' <span>REPONSE C</span></label>'+
+   		 '<input type="radio" id="C" name="color" value="C" onclick=Suivant('+j+','+TREP[2]+')><label for="C">'+
+     ' <span>'+REP[2]+'</span></label>'+
      '</div>'+
      '</div>';
+     
+    QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
+    "<h1> #"+(j+1)+"</h1>"+
+	'<img src="'+Question+'" height=70px;></img>'+
+	'</div>';	
+	};
+	QUEST+='<div id="SHOW1010" style="visibility: hidden";><h1>Terminé !!!</h1></div>';
+	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><h1>Terminé !!!</h1></div>';
+	 
+	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
-	
-	
-	document.getElementsByClassName('well-lg')[0].style["background-color"]=''
-	},800)
-	//document.getElementById("Suivant").setAttribute( "onClick","fetchSuivant("+i+","+DATA+","+SCORE+")");
+	document.getElementById("SHOW0").style.visibility="visible";
+	document.getElementById("SHOW100").style.visibility="visible";
+
 }
 
+
+
+function Suivant (j,REP) {
+	document.getElementById("A").disabled = true;
+	document.getElementById("B").disabled = true;
+	document.getElementById("C").disabled = true;
+	
+	setTimeout(function() {
+	document.getElementById("SHOW"+j).innerHTML="";
+	document.getElementById("SHOW10"+j).innerHTML="";
+	j=j+1;
+	document.getElementById("SHOW"+j).style.visibility="visible";
+	document.getElementById("SHOW10"+j).style.visibility="visible";
+	document.getElementsByClassName('well-lg')[0].style["background-color"]='';
+	document.getElementById("A").disabled = false;
+	document.getElementById("B").disabled = false;
+	document.getElementById("C").disabled = false;
+	},300);
+	if (j==0) {SCORE=0}else {}
+	if (REP==1){
+		document.getElementsByClassName('well-lg')[0].style["background-color"]='lightgreen';
+		SCORE+=1;
+		document.getElementById("SCORE").innerHTML=SCORE;
+		}
+	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'}
+	
+}
+
+
 function fetchBoutton(theme){
-var DATA="";
+		var i=0;
+
 	if (theme == "Sport"){
- 	DATA=fetchSport()
+ 	fetchSport()
   }
   else if (theme == "Music"){
-    DATA=fetchMusic()
+    fetchMusic()
   }
   else if (theme == "Cinema"){
-   DATA= fetchCinema()
+   fetchCinema()
   }
   else if (theme == "Flag"){
     fetchFlag()
@@ -59,7 +89,6 @@ var DATA="";
   }else{
     console.log("erreur")
   };
-	var i=0;
-	fetchSuivant(0,DATA,0,"start");
+  
 }
 
