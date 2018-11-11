@@ -1,6 +1,20 @@
 var SCORE=0;
 
+var form='<div id="SHOW1010" style="visibility: hidden";><h1 class="text-center">Youpi !!</h1><form class="form-horizontal" action="">'+
+    '<div class="form-group"><label class="control-label col-sm-2" for="email">Nickname</label>'+
+		'<div class="col-sm-4"><input type="text" class="form-control" id="name" name="name"></div></div>'+
+    '<div class="form-group"><label class="control-label col-sm-2" for="email">Age</label>'+
+		'<div class="col-sm-3"><input type="number" class="form-control" id="age" name="age" value=25></div></div>'+
+    '<div class="form-group"><div class="col-sm-1"></div>'+
+    	'<div class="radio col-sm-2"><label><input type="radio" name="optradio">Homme</label></div>'+
+    	'<div class="radio col-sm-2"><label><input type="radio" name="optradio">Femme</label></div></div>'+
+    '<div class="form-group text-center"> ' +
+       ' <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></button>'+
+        '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></button>'+
+		'</div></form></div> ';
+
 fetchSuivant = function (DATA){
+	document.getElementById("doublon").style.visibility="visible";
 	var CHOIX = '';
 	var QUEST= '';
 	
@@ -30,8 +44,8 @@ fetchSuivant = function (DATA){
 	'<img src="'+Question+'" height=70px;></img>'+
 	'</div>';	
 	};
-	QUEST+='<div id="SHOW1010" style="visibility: hidden";><h1>Terminé !!!</h1></div>';
-	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><h1>Terminé !!!</h1></div>';
+	QUEST+=form;
+	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><br><h2>Votre score : <span id="SCORE2" class="label label-warning" >0</span></h2></div>';
 	 
 	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
@@ -58,14 +72,16 @@ function Suivant (j,REP) {
 	document.getElementById("B").disabled = false;
 	document.getElementById("C").disabled = false;
 	},300);
-	if (j==0) {SCORE=0}else {}
+	if (j==0) {SCORE=0}
 	if (REP==1){
 		document.getElementsByClassName('well-lg')[0].style["background-color"]='lightgreen';
 		SCORE+=1;
 		document.getElementById("SCORE").innerHTML=SCORE;
+		document.getElementById("SCORE2").innerHTML=SCORE;
 		}
-	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'}
+	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
 	
+	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
 }
 
 
