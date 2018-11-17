@@ -10,7 +10,7 @@ var form='<div id="SHOW1010" style="visibility: hidden";><h1 class="text-center"
     	'<div class="radio col-sm-2"><label><input type="radio" name="optradio">Femme</label></div></div>'+
     '<div class="form-group text-center"> ' +
        ' <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></button>'+
-        '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></button>'+
+        '<button  class="btn btn-default" onclick=stats();><span class="glyphicon glyphicon-stats"></span></button>'+
 		'</div></form></div> ';
 
 fetchSuivant = function (DATA){
@@ -108,3 +108,11 @@ function fetchBoutton(theme){
   
 }
 
+function stats() {
+	sendgetfetch("Flag");
+	ScoreBOARD="ScoreBOARD";
+	GRAPH="GRAPH";
+	document.getElementById("Question").innerHTML=ScoreBOARD;
+	document.getElementById("Reponse").innerHTML=GRAPH;
+
+}
