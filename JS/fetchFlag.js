@@ -55,7 +55,8 @@ fetchFlag = function(){
           name.splice(tirageFaux2,1);
           nameQuestion[i].faux2 = nameFaux2[i];
         };
-      console.log(nameQuestion)
+     // console.log(nameQuestion)
+      fetchSuivant(nameQuestion);
       })
 
     }

@@ -39,9 +39,11 @@ fetchGames = function(){
             var reponse = listReponse[i]
             var false1 = listFalse1[i]
             var false2 = listFalse2[i]
-            jsonArray.push({Question:question, Reponse:reponse, Faux1:false1, Faux2:false2})
+            jsonArray.push({question:question, reponse:reponse, faux1:false1, faux2:false2})
           }
-		  console.log(jsonArray);
+		  //console.log(jsonArray);
+		  fetchSuivant(jsonArray);
+		  
 		})
 	}
 })}
