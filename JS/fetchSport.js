@@ -24,10 +24,10 @@ fetchSport = function(){
           var teamListe = []
           var blasonListe = []
           for(team in jsonListe){
-            if(jsonListe[team].strTeamBanner !== null){ // Pour ceux qui ont un blason non null
-              if(jsonListe[team].strTeamBanner.length > 0){ // Pour ceux qui ont un blason avec un chemin renseigné
+            if(jsonListe[team].strTeamJersey !== null){ // Pour ceux qui ont un badge non null
+              if(jsonListe[team].strTeamJersey.length > 0){ // Pour ceux qui ont un badge avec un chemin renseigné
                 teamListe.push(jsonListe[team].strTeam)
-                blasonListe.push(jsonListe[team].strTeamBanner)
+                blasonListe.push(jsonListe[team].strTeamJersey)
               }
             }
           }
