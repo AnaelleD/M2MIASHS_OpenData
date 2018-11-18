@@ -27,17 +27,18 @@ module.exports = function(app, express) {
 
     // Theme Music
     mainRoutes.get('/requestMusic' , function(req, res) {
-	request('https://query.wikidata.org/sparql?query=SELECT%20%3Fmonument%20%3Fphoto%20%3Flabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cfr%22.%20%7D%0A%20%20%3Fmonument%20wdt%3AP31%20wd%3AQ358.%0A%20%20%3Fmonument%20wdt%3AP18%20%3Fphoto.%0A%20%20%3Fmonument%20rdfs%3Alabel%20%3Flabel%20filter%20(lang(%3Flabel)%20%3D%20%22fr%22).%0A%7D&format=json&format=json',
+	    request('https://query.wikidata.org/sparql?query=SELECT%20%3Fmonument%20%3Fphoto%20%3Flabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cfr%22.%20%7D%0A%20%20%3Fmonument%20wdt%3AP31%20wd%3AQ358.%0A%20%20%3Fmonument%20wdt%3AP18%20%3Fphoto.%0A%20%20%3Fmonument%20rdfs%3Alabel%20%3Flabel%20filter%20(lang(%3Flabel)%20%3D%20%22fr%22).%0A%7D&format=json&format=json',
         function(error, response, body){
             var json = JSON.parse(body)
             res.send(json)
             })
     })
 			
-
+    
     // Theme Cinema
     mainRoutes.get('/requestCinema' , function(req, res) {
       film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js
+      
     })
 
     // Theme Flag

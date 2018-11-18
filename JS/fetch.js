@@ -116,3 +116,12 @@ function stats() {
 	document.getElementById("Reponse").innerHTML=GRAPH;
 
 }
+
+function stats() {
+	sendgetfetch("Cinema");
+	ScoreBOARD="ScoreBOARD";
+	GRAPH="GRAPH";
+	document.getElementById("Question").innerHTML=ScoreBOARD;
+	document.getElementById("Reponse").innerHTML=GRAPH;
+
+}

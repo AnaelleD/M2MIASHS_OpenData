@@ -35,34 +35,39 @@ Film.getFilm = function(cptFilm, mesfilms, res) // créer une fonction qui prend
             // Créer un objet json qui contiendra: le titre, l'acteur principal et 2 acteurs fictifs
             monfilm = {} // initialiser l'objet json
 
-            // Alimenter l'objet monfilm
+            // Alimenter l'objet 
+            
             // Extraire le nom de l'acteur principal du jsonomdb
             actors = jsonomdb.Actors // récupérer la valeur de la clef "Actors" du jsonomdb
             var splt_act = actors.split(",") // ne récupérer que le premier nom d'acteur contenu dans actors
             monfilm.reponse = splt_act[0] // ne récupérer que le premier acteur de la liste
-  
+            
             // Définir un 1er acteur fictif
             actors_fictif1 = jsonomdb.Actors
             var splt_act_fictif1 = actors_fictif1.split(",") // ne récupérer que le premier nom d'acteur contenu dans actors
+            monfilm.faux1 = splt_act_fictif1[1] // ne récupérer que le premier acteur de la liste
             monfilm.faux1 = splt_act_fictif1[1] // ne récupérer que le premier acteur de la liste
             
             // Définir un 2ème acteur fictif
             actors_fictif2 = jsonomdb.Actors
             var splt_act_fictif2 = actors_fictif2.split(",") // ne récupérer que le premier nom d'acteur contenu dans actors
             monfilm.faux2 = splt_act_fictif2[2] // ne récupérer que le premier acteur de la liste
-                  
+                 
             // Extraire l'affiche du film du jsonomdb
-            monfilm.question = jsonomdb.Poster // récupérer la valeur de la clef "Title" du jsonomdb
-
+            monfilm.question = jsonomdb.Poster // récupérer la valeur de la clef "Poster" du jsonomdb
+            
             // Extraire l'affiche du film du jsonomdb
             //monfilm.image = jsonomdb.Poster // récupérer l'image correspondant à la clef "Poster" du jsonomdb
             
             // Alimenter le dictionnaire mesfilms avec la valeur de monfilm
             mesfilms[cptFilm] = monfilm
-
+            
             // incrémenter le compteur de la fonction Film.getFilm 
             Film.getFilm(cptFilm + 1, mesfilms, res)
+
+            //console.log("ma liste de 10 films est :" + JSON.stringify(mesfilms))
           }
+            
         }
         catch(err)
         {
@@ -79,6 +84,7 @@ Film.getFilm = function(cptFilm, mesfilms, res) // créer une fonction qui prend
     }
   }
 
+  
 
 Film.getFilms = function(res)
 { 
