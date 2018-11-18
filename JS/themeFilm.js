@@ -2,13 +2,13 @@ const request = require('request') // appeler le module "request"
 const Film = {} 
 const titresfilms = require('./titres_films.json') // appeler le fichier titres_films.json contenant les titres de films qui vont servir au tirage aléatoire de titre de film
 
-Film.getFilm = function(cptFilm, mesfilms, res)
+Film.getFilm = function(cptFilm, mesfilms, res) // créer une fonction qui prend en paramètres: un compteur de films, des films et une réponse
 {
-  if(cptFilm == 10)
+  if(cptFilm == 10) // Si le compteur atteint 10 films
   {
-    res.send(mesfilms)
+    res.send(mesfilms) // alors renvoyer les films
   }
-  else
+  else // sinon
   {
     // créer un objet  qui contient le titre du film 
     montitre = ""
@@ -51,11 +51,11 @@ Film.getFilm = function(cptFilm, mesfilms, res)
             var splt_act_fictif2 = actors_fictif2.split(",") // ne récupérer que le premier nom d'acteur contenu dans actors
             monfilm.faux2 = splt_act_fictif2[2] // ne récupérer que le premier acteur de la liste
                   
-            // Extraire le titre du film du jsonomdb
-            monfilm.question = jsonomdb.Title // récupérer la valeur de la clef "Title" du jsonomdb
+            // Extraire l'affiche du film du jsonomdb
+            monfilm.question = jsonomdb.Poster // récupérer la valeur de la clef "Title" du jsonomdb
 
             // Extraire l'affiche du film du jsonomdb
-            monfilm.image = jsonomdb.Poster // récupérer l'image correspondant à la clef "Poster" du jsonomdb
+            //monfilm.image = jsonomdb.Poster // récupérer l'image correspondant à la clef "Poster" du jsonomdb
             
             // Alimenter le dictionnaire mesfilms avec la valeur de monfilm
             mesfilms[cptFilm] = monfilm
@@ -84,7 +84,7 @@ Film.getFilms = function(res)
 { 
   mesfilms = [] // initialiser le dictionnaire
   cptFilm = 0 // initialiser le compteur
-  Film.getFilm(cptFilm , mesfilms, res) // appeler la fonction Film.getFilm
+  Film.getFilm(cptFilm , mesfilms, res) // appeler la fonction Film.getFilm (fonction récursive)
 }
 
 module.exports = Film // permet d'exporter le fichier js et de l'utiliser par un autre fichier js
