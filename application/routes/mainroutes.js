@@ -70,13 +70,12 @@ module.exports = function(app, express) {
         "score": true,
         "age": true,
         "sexe": true},function(err, scores){
-        console.log(scores);
         if (err){
             res.send(err);
         }
         if (res){
           res.json(scores);
-          console.log(scores);
+          //console.log(scores);
         }
       });
     })
