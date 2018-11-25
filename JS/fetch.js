@@ -17,7 +17,7 @@ fetchSuivant = function (DATA){
 	document.getElementById("doublon").style.visibility="visible";
 	var CHOIX = '';
 	var QUEST= '';
-	
+
 	for (j=0;j<10;j++) {
 	Question = DATA[j].question
 	REPA= DATA[j].reponse
@@ -28,7 +28,7 @@ fetchSuivant = function (DATA){
 	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
   		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
      ' <span>'+REP[0]+'</span></label>'+
-     '</div>'+  
+     '</div>'+
      '<div>'+
    		 '<input type="radio" id="B" name="color" value="B" onclick=Suivant('+j+','+TREP[1]+')><label for="B">'+
      ' <span>'+REP[1]+'</span></label>'+
@@ -38,15 +38,15 @@ fetchSuivant = function (DATA){
      ' <span>'+REP[2]+'</span></label>'+
      '</div>'+
      '</div>';
-     
+
     QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
     "<h1> #"+(j+1)+"</h1>"+
 	'<img src="'+Question+'" height=70px;></img>'+
-	'</div>';	
+	'</div>';
 	};
 	QUEST+=form;
 	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><br><h2>Votre score : <span id="SCORE2" class="label label-warning" >0</span></h2></div>';
-	 
+
 	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
 	document.getElementById("SHOW0").style.visibility="visible";
@@ -60,7 +60,7 @@ function Suivant (j,REP) {
 	document.getElementById("A").disabled = true;
 	document.getElementById("B").disabled = true;
 	document.getElementById("C").disabled = true;
-	
+
 	setTimeout(function() {
 	document.getElementById("SHOW"+j).innerHTML="";
 	document.getElementById("SHOW10"+j).innerHTML="";
@@ -80,7 +80,7 @@ function Suivant (j,REP) {
 		document.getElementById("SCORE2").innerHTML=SCORE;
 		}
 	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
-	
+
 	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
 }
 
@@ -105,14 +105,14 @@ function fetchBoutton(theme){
   }else{
     console.log("erreur")
   };
-  
+
 }
 
 function stats() {
 	sendgetfetch("Flag");
 	ScoreBOARD="ScoreBOARD";
-	GRAPH="GRAPH";
+	//GRAPH="GRAPH";
 	document.getElementById("Question").innerHTML=ScoreBOARD;
-	document.getElementById("Reponse").innerHTML=GRAPH;
+	//document.getElementById("Reponse").innerHTML=GRAPH;
 
 }
