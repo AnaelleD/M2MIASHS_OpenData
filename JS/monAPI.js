@@ -3,14 +3,16 @@ sendgetfetch = function(theme)
 {
   fetch('/score?theme='+theme).then(function(response) {
     if (!response.ok) {
-      console.log("Erreur du fetch vers /requestSport")
+      console.log("Erreur du get vers /score")
     }
     else{
       return response.json().then(function(json) {
         console.log(json)
+
+
         //dessin histogram
-       function initHistogram(svg, w, h, d, a) {
-          svgHist = svg;
+       function initHistogram(w, h, d, a) {
+         var svgHist = d3.select("#Reponse");
           wHist = w;
           hHist = h;
           dataHist = d;
@@ -109,17 +111,17 @@ sendgetfetch = function(theme)
             .attr("height", function(d) { return hHist-50-scaleYHist(d.density); });
          }
 
-        }
-    //document.getElementById("Reponse").innerHTML="test";
-    initHistogram(d3.select("#Reponse"), 350, 230, json, "score");
+         initHistogram(350, 230, json, "score");
+       })
+     }
+   }
+)}
 
-  }
-)}
-)}
+
+
 
 // Post
 sendpostfetch = function(nickname,theme,score,age,sexe){
-  console.log("Dans sendpostfetch()");
 	fetch('/score', {
   		method: 'POST',
   		body: JSON.stringify({
@@ -132,6 +134,5 @@ sendpostfetch = function(nickname,theme,score,age,sexe){
 		headers: {
       		'Content-Type': 'application/json'
     	}
-	},
-  console.log("dans fetch"));
+	})
 }

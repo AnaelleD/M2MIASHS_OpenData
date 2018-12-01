@@ -7,27 +7,29 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/fetch"></script>
+    <script src="/button"></script>
     <script src="/fetchSport"></script>
-    <script src="/fetchMusic"></script>
+    <script src="/fetchMonument"></script>
     <script src="/fetchCinema"></script>
     <script src="/fetchFlag"></script>
     <script src="/fetchGames"></script>
     <script src="/monAPI"></script>
+    <script src="/stats"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
   </head>
 
   <body style="background-color:#2d2d30" >
 
     <div class="jumbotron text-center">
-      <h1>G ou G pas ?</h1>
+      <h1>Culture G ou G pas ?</h1>
       <p>Questions de culture génerale</p>
     </div>
 
     <div class="text-center">
+      <h2 style="color:white">Choississez un thème : </h2>
       <button type="button" class="btn btn-default" onclick="fetchBoutton('Sport');">Sport</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Cinema');">Cinema</button>
-      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Music');">Musique</button>
+      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Monument');">Monument</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Flag');">Drapeau</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Games');">Jeux Vidéo</button>
       <button type="button" class="btn btn-default" onclick=stats();><span class="glyphicon glyphicon-stats"></span></button>

@@ -1,7 +1,28 @@
-var SCORE=0;
+// Fonction appelée lors click boutton choix des thèmes
+function fetchBoutton(theme){
+		var i=0;
+	if (theme == "Sport"){
+ 	fetchSport()
+  }
+  else if (theme == "Monument"){
+    fetchMonument()
+  }
+  else if (theme == "Cinema"){
+   fetchCinema()
+  }
+  else if (theme == "Flag"){
+    fetchFlag()
+	  }
+  else if (theme == "Games"){
+    fetchGames()
+  }else{
+    console.log("erreur")
+  };
+}
 
+// Appelée dans fetch${theme}. Initialisation question / reponses
 fetchSuivant = function (DATA,theme){
-  var form='<div id="SHOW1010" style="visibility: hidden";><h1 class="text-center">Youpi !!</h1>'+
+  var form='<div id="SHOW1010" style="visibility: hidden";><h2 class="text-center">Bravo ! </br> Remplissez le formulaire pour visualiser vos stats.</h2>'+
       '<div class="form-group"><label class="control-label col-sm-2" for="email">Nickname</label>'+
   		'<div class="col-sm-4"><input type="text" class="form-control" id="name" name="name"></div></div>'+
       '<div class="form-group"><label class="control-label col-sm-2" for="email">Age</label>'+
@@ -54,7 +75,8 @@ fetchSuivant = function (DATA,theme){
 }
 
 
-
+// Appelé par click boutton suivant
+var SCORE=0;
 function Suivant (j,REP) {
 	document.getElementById("A").disabled = true;
 	document.getElementById("B").disabled = true;
@@ -81,59 +103,4 @@ function Suivant (j,REP) {
 	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
 
 	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
-}
-
-
-function fetchBoutton(theme){
-		var i=0;
-
-	if (theme == "Sport"){
- 	fetchSport()
-  }
-  else if (theme == "Music"){
-    fetchMusic()
-  }
-  else if (theme == "Cinema"){
-   fetchCinema()
-  }
-  else if (theme == "Flag"){
-    fetchFlag()
-	  }
-  else if (theme == "Games"){
-    fetchGames()
-  }else{
-    console.log("erreur")
-  };
-
-}
-
-function stats(theme) {
-
-	sendgetfetch(theme);
-	ScoreBOARD="ScoreBOARD";
-	GRAPH="GRAPH";
-	document.getElementById("Question").innerHTML=ScoreBOARD;
-	document.getElementById("Reponse").innerHTML=GRAPH;
-
-}
-
-function statsPost(theme) {
-  theme = theme;
-  nickname = document.getElementById("name").value;
-  score = $("#SCORE2").text();
-  age = document.getElementById("age").value;
-  var radios = document.getElementsByName('optradio');
-  for (var i = 0, length = radios.length; i < length; i++) {
-      if (radios[i].checked) {
-          var sexe = radios[i].value;
-          break;
-      }
-  }
-  console.log(nickname);
-  console.log(theme);
-  console.log(score);
-  console.log(age);
-  console.log(sexe);
-  sendpostfetch(nickname,theme,score,age,sexe);
-  stats(theme);
 }

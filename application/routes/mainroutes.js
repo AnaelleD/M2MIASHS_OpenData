@@ -25,20 +25,20 @@ module.exports = function(app, express) {
             })
     })
 
-    // Theme Music
-    mainRoutes.get('/requestMusic' , function(req, res) {
+    // Theme Monument
+    mainRoutes.get('/requestMonument' , function(req, res) {
 	    request('https://query.wikidata.org/sparql?query=SELECT%20%3Fmonument%20%3Fphoto%20%3Flabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cfr%22.%20%7D%0A%20%20%3Fmonument%20wdt%3AP31%20wd%3AQ358.%0A%20%20%3Fmonument%20wdt%3AP18%20%3Fphoto.%0A%20%20%3Fmonument%20rdfs%3Alabel%20%3Flabel%20filter%20(lang(%3Flabel)%20%3D%20%22fr%22).%0A%7D&format=json&format=json',
         function(error, response, body){
             var json = JSON.parse(body)
             res.send(json)
             })
     })
-			
-    
+
+
     // Theme Cinema
     mainRoutes.get('/requestCinema' , function(req, res) {
       film.getFilms(res) // appliquer la fonction getFilm du fichier themeFilm.js
-      
+
     })
 
     // Theme Flag
@@ -59,8 +59,8 @@ module.exports = function(app, express) {
 				})
 	})
 
-	
-	
+
+
     /////////////// Notre API
     // API Get
     mainRoutes.get('/score', function(req, res) {
@@ -82,7 +82,6 @@ module.exports = function(app, express) {
 
     // API Post
     mainRoutes.post('/score', function(req,res){
-      console.log('Received a post on /score')
       body = req.body
     // Nous utilisons le schéma Score
       var score = new Score();
@@ -104,8 +103,8 @@ module.exports = function(app, express) {
 
     /////////////// livre un fichier js client
     // Global, Animation, Modif DOM
-    mainRoutes.get('/fetch', function(req, res) {
-      fs.readFile("JS/fetch.js", function(err, data) {
+    mainRoutes.get('/button', function(req, res) {
+      fs.readFile("JS/button.js", function(err, data) {
        res.writeHead(200, {'Content-Type': 'text/plain'})
        res.write(data)
        res.end()
@@ -121,9 +120,9 @@ module.exports = function(app, express) {
     })
   })
 
-    // Theme Music
-    mainRoutes.get('/fetchMusic', function(req, res) {
-      fs.readFile("JS/fetchMusic.js", function(err, data) {
+    // Theme Monument
+    mainRoutes.get('/fetchMonument', function(req, res) {
+      fs.readFile("JS/fetchMonument.js", function(err, data) {
        res.writeHead(200, {'Content-Type': 'text/plain'})
        res.write(data)
        res.end()
@@ -151,6 +150,15 @@ module.exports = function(app, express) {
   // Theme Games
   mainRoutes.get('/fetchGames', function(req, res) {
     fs.readFile("JS/fetchGames.js", function(err, data) {
+     res.writeHead(200, {'Content-Type': 'text/plain'})
+     res.write(data)
+     res.end()
+  })
+  })
+
+  // Affichage classement et stats
+  mainRoutes.get('/stats', function(req, res) {
+    fs.readFile("JS/stats.js", function(err, data) {
      res.writeHead(200, {'Content-Type': 'text/plain'})
      res.write(data)
      res.end()
