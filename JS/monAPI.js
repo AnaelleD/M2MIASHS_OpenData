@@ -122,8 +122,8 @@ sendgetfetch = function(theme)
 )}
 
 // Post
-sendpostfetch = function(nickname,theme,score,age,sexe)
-{
+sendpostfetch = function(nickname,theme,score,age,sexe){
+  console.log("Dans sendpostfetch()");
 	fetch('/score', {
   		method: 'POST',
   		body: JSON.stringify({
@@ -136,5 +136,6 @@ sendpostfetch = function(nickname,theme,score,age,sexe)
 		headers: {
       		'Content-Type': 'application/json'
     	}
-	})
+	},
+  console.log("dans fetch"));
 }

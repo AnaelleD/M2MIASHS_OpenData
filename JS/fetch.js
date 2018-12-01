@@ -1,23 +1,22 @@
 var SCORE=0;
 
-var form='<div id="SHOW1010" style="visibility: hidden";><h1 class="text-center">Youpi !!</h1><form class="form-horizontal" action="">'+
-    '<div class="form-group"><label class="control-label col-sm-2" for="email">Nickname</label>'+
-		'<div class="col-sm-4"><input type="text" class="form-control" id="name" name="name"></div></div>'+
-    '<div class="form-group"><label class="control-label col-sm-2" for="email">Age</label>'+
-		'<div class="col-sm-3"><input type="number" class="form-control" id="age" name="age" value=25></div></div>'+
-    '<div class="form-group"><div class="col-sm-1"></div>'+
-    	'<div class="radio col-sm-2"><label><input type="radio" name="optradio">Homme</label></div>'+
-    	'<div class="radio col-sm-2"><label><input type="radio" name="optradio">Femme</label></div></div>'+
-    '<div class="form-group text-center"> ' +
-       ' <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></button>'+
-        '<button  class="btn btn-default" onclick=stats();><span class="glyphicon glyphicon-stats"></span></button>'+
-		'</div></form></div> ';
+fetchSuivant = function (DATA,theme){
+  var form='<div id="SHOW1010" style="visibility: hidden";><h1 class="text-center">Youpi !!</h1>'+
+      '<div class="form-group"><label class="control-label col-sm-2" for="email">Nickname</label>'+
+  		'<div class="col-sm-4"><input type="text" class="form-control" id="name" name="name"></div></div>'+
+      '<div class="form-group"><label class="control-label col-sm-2" for="email">Age</label>'+
+  		'<div class="col-sm-3"><input type="number" class="form-control" id="age" name="age" value=25></div></div>'+
+      '<div class="form-group"><div class="col-sm-1"></div>'+
+      	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="M" checked="checked">Homme</label></div>'+
+      	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="F">Femme</label></div></div>'+
+      '<div class="form-group text-center"> ' +
+          '<button  class="btn btn-default" onclick=statsPost("'+theme+'");><span class="glyphicon glyphicon-stats"></span></button>'+
+  		'</div></div> ';
 
-fetchSuivant = function (DATA){
 	document.getElementById("doublon").style.visibility="visible";
 	var CHOIX = '';
 	var QUEST= '';
-	
+
 	for (j=0;j<10;j++) {
 	Question = DATA[j].question
 	REPA= DATA[j].reponse
@@ -28,7 +27,7 @@ fetchSuivant = function (DATA){
 	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
   		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
      ' <span>'+REP[0]+'</span></label>'+
-     '</div>'+  
+     '</div>'+
      '<div>'+
    		 '<input type="radio" id="B" name="color" value="B" onclick=Suivant('+j+','+TREP[1]+')><label for="B">'+
      ' <span>'+REP[1]+'</span></label>'+
@@ -38,15 +37,15 @@ fetchSuivant = function (DATA){
      ' <span>'+REP[2]+'</span></label>'+
      '</div>'+
      '</div>';
-     
+
     QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
     "<h1> #"+(j+1)+"</h1>"+
 	'<img src="'+Question+'" height=70px;></img>'+
-	'</div>';	
+	'</div>';
 	};
 	QUEST+=form;
 	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><br><h2>Votre score : <span id="SCORE2" class="label label-warning" >0</span></h2></div>';
-	 
+
 	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
 	document.getElementById("SHOW0").style.visibility="visible";
@@ -60,7 +59,7 @@ function Suivant (j,REP) {
 	document.getElementById("A").disabled = true;
 	document.getElementById("B").disabled = true;
 	document.getElementById("C").disabled = true;
-	
+
 	setTimeout(function() {
 	document.getElementById("SHOW"+j).innerHTML="";
 	document.getElementById("SHOW10"+j).innerHTML="";
@@ -80,7 +79,7 @@ function Suivant (j,REP) {
 		document.getElementById("SCORE2").innerHTML=SCORE;
 		}
 	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
-	
+
 	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
 }
 
@@ -105,14 +104,36 @@ function fetchBoutton(theme){
   }else{
     console.log("erreur")
   };
-  
+
 }
 
-function stats() {
-	sendgetfetch("Flag");
+function stats(theme) {
+
+	sendgetfetch(theme);
 	ScoreBOARD="ScoreBOARD";
 	GRAPH="GRAPH";
 	document.getElementById("Question").innerHTML=ScoreBOARD;
 	document.getElementById("Reponse").innerHTML=GRAPH;
 
+}
+
+function statsPost(theme) {
+  theme = theme;
+  nickname = document.getElementById("name").value;
+  score = $("#SCORE2").text();
+  age = document.getElementById("age").value;
+  var radios = document.getElementsByName('optradio');
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+          var sexe = radios[i].value;
+          break;
+      }
+  }
+  console.log(nickname);
+  console.log(theme);
+  console.log(score);
+  console.log(age);
+  console.log(sexe);
+  sendpostfetch(nickname,theme,score,age,sexe);
+  stats(theme);
 }
