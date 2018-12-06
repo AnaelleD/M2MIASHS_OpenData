@@ -1,10 +1,7 @@
 
 // Affichage des stats
 function stats(theme) {
-
 	document.getElementById("Question").innerHTML="ScoreBOARD";
-	document.getElementById("Reponse").innerHTML="GRAPH";
-
   sendgetfetch(theme);
 }
 

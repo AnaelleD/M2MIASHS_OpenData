@@ -12,7 +12,7 @@ sendgetfetch = function(theme)
 
         //dessin histogram
        function initHistogram(w, h, d, a) {
-         var svgHist = d3.select("#Reponse");
+         var svgHist = d3.select("#Reponse").append("svg");
           wHist = w;
           hHist = h;
           dataHist = d;
