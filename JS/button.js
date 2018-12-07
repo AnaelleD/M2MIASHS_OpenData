@@ -1,3 +1,4 @@
+
 // Fonction appelée lors click boutton choix des thèmes
 function fetchBoutton(theme){
 		var i=0;
@@ -19,7 +20,7 @@ function fetchBoutton(theme){
     console.log("erreur")
   };
 }
-
+var SCORE=0;
 // Appelée dans fetch${theme}. Initialisation question / reponses
 fetchSuivant = function (DATA,theme){
   var form='<div id="SHOW1010" style="visibility: hidden";><h2 class="text-center">Bravo ! </br> Remplissez le formulaire pour visualiser vos stats.</h2>'+
@@ -43,12 +44,29 @@ fetchSuivant = function (DATA,theme){
 	REPA= DATA[j].reponse
 	REPB= DATA[j].faux1
 	REPC= DATA[j].faux2
-	REP=[REPA,REPB,REPC];
-	TREP=[1,0,0];
+    
+
+	var ALEA=Math.random();
+	
+	if (ALEA<= 1/3) {
+		REP=[REPA,REPB,REPC];
+		TREP=[1,0,0];
+	}
+	else if (ALEA>=2/3) {
+		REP=[REPB,REPA,REPC];
+		TREP=[0,1,0];
+	}
+	else  {
+		REP=[REPC,REPB,REPA];
+		TREP=[0,0,1];
+	}
+	
 	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
   		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
      ' <span>'+REP[0]+'</span></label>'+
-     '</div>'+
+     '</div>'+  
+
+     
      '<div>'+
    		 '<input type="radio" id="B" name="color" value="B" onclick=Suivant('+j+','+TREP[1]+')><label for="B">'+
      ' <span>'+REP[1]+'</span></label>'+
@@ -59,13 +77,15 @@ fetchSuivant = function (DATA,theme){
      '</div>'+
      '</div>';
 
+     
     QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
     "<h1> #"+(j+1)+"</h1>"+
-	'<img src="'+Question+'" height=70px;></img>'+
-	'</div>';
+	'<img src="'+Question+'" width=300px;></img>'+
+	'</div>';	
 	};
 	QUEST+=form;
 	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><br><h2>Votre score : <span id="SCORE2" class="label label-warning" >0</span></h2></div>';
+	 
 
 	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
@@ -75,8 +95,6 @@ fetchSuivant = function (DATA,theme){
 }
 
 
-// Appelé par click boutton suivant
-var SCORE=0;
 function Suivant (j,REP) {
 	document.getElementById("A").disabled = true;
 	document.getElementById("B").disabled = true;
@@ -101,6 +119,7 @@ function Suivant (j,REP) {
 		document.getElementById("SCORE2").innerHTML=SCORE;
 		}
 	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
+
 
 	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
 }
