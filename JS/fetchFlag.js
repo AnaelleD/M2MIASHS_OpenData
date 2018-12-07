@@ -56,7 +56,7 @@ fetchFlag = function(){
           nameQuestion[i].faux2 = nameFaux2[i];
         };
      // console.log(nameQuestion)
-      fetchSuivant(nameQuestion);
+      fetchSuivant(nameQuestion,"Flag");
       })
 
     }

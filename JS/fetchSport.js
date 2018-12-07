@@ -57,9 +57,8 @@ fetchSport = function(){
             jsonArray.push({question:laQuestion,reponse:laReponse,faux1:leFaux1,faux2:leFaux2})
           }
           //return jsonArray;
-          fetchSuivant(jsonArray);
-          
+          fetchSuivant(jsonArray,"Sport");
+
         })}
     })
   }
-  

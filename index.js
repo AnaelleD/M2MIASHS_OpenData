@@ -4,7 +4,9 @@ const app       = express()
 const morgan    = require('morgan')
 const mongoose = require('mongoose')
 const configDB = require('./config/database.js')
+const bodyParser   = require('body-parser')
 
+app.use(bodyParser.json())
 app.use(morgan('dev')) // log every request to the console
 app.set('views', './view')
 app.set('view engine', 'ejs') // set up ejs for templating

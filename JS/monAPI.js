@@ -2,128 +2,126 @@
 sendgetfetch = function(theme)
 {
   fetch('/score?theme='+theme).then(function(response) {
-    /*
-    * histogram with D3 code
-    */
-    var color = "steelblue";
-
-    // retrieve data from response
-    var values = response.json();
-
-    // A formatter for counts.
-    var formatCount = d3.format(",.0f");
-
-    var margin = {top: 20, right: 30, bottom: 30, left: 30},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
-    var max = d3.max(values.score);
-    var min = d3.min(values.score);
-    var x = d3.scale.linear()
-          .domain([min, max])
-          .range([0, width]);
-
-    // Generate a histogram using twenty uniformly-spaced bins.
-    var data = d3.layout.histogram()
-        .bins(x.ticks(20))
-        (values);
-
-    var yMax = d3.max(data, function(d){return d.length});
-    var yMin = d3.min(data, function(d){return d.length});
-    var colorScale = d3.scale.linear()
-                .domain([yMin, yMax])
-                .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
-
-    var y = d3.scale.linear()
-        .domain([0, yMax])
-        .range([height, 0]);
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom");
-
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    var bar = svg.selectAll(".bar")
-        .data(data)
-      .enter().append("g")
-        .attr("class", "bar")
-        .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-    bar.append("rect")
-        .attr("x", 1)
-        .attr("width", (x(data[0].dx) - x(0)) - 1)
-        .attr("height", function(d) { return height - y(d.y); })
-        .attr("fill", function(d) { return colorScale(d.y) });
-
-    bar.append("text")
-        .attr("dy", ".75em")
-        .attr("y", -12)
-        .attr("x", (x(data[0].dx) - x(0)) / 2)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return formatCount(d.y); });
-
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
-    /*
-    * Adding refresh method to reload new data
-    */
-    function refresh(values){
-      // var values = d3.range(1000).map(d3.random.normal(20, 5));
-      var data = d3.layout.histogram()
-        .bins(x.ticks(20))
-        (values);
-
-      // Reset y domain using new data
-      var yMax = d3.max(data, function(d){return d.length});
-      var yMin = d3.min(data, function(d){return d.length});
-      y.domain([0, yMax]);
-      var colorScale = d3.scale.linear()
-                  .domain([yMin, yMax])
-                  .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
-
-      var bar = svg.selectAll(".bar").data(data);
-
-      // Remove object with data
-      bar.exit().remove();
-
-      bar.transition()
-        .duration(1000)
-        .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-      bar.select("rect")
-          .transition()
-          .duration(1000)
-          .attr("height", function(d) { return height - y(d.y); })
-          .attr("fill", function(d) { return colorScale(d.y) });
-
-      bar.select("text")
-          .transition()
-          .duration(1000)
-          .text(function(d) { return formatCount(d.y); });
-
+    if (!response.ok) {
+      console.log("Erreur du get vers /score")
     }
+    else{
+      return response.json().then(function(json) {
+        console.log(json)
 
-    // Calling refresh repeatedly.
-    setInterval(function() {
-      var values = d3.range(1000).map(d3.random.normal(20, 5));
-      refresh(values);
-    }, 2000);
 
-    console.log(response.json())
-  }
+        //dessin histogram
+       function initHistogram(w, h, d, a) {
+         var svgHist = d3.select("#Reponse").append("svg");
+          wHist = w;
+          hHist = h;
+          dataHist = d;
+          attHist = a;
+
+          //var histogram
+          var scaleXHist = d3.scaleLinear();
+          var scaleYHist = d3.scaleLinear();
+
+          var xAxisHist = d3.axisBottom(scaleXHist);
+          var yAxisHist = d3.axisLeft(scaleYHist);
+
+          var gxAxisHist;
+          var gyAxisHist;
+
+          var classes;
+          var nbClasses = 10;
+
+          var bars;
+
+          /*
+        	 * SVG
+        	 */
+        	svgHist.attr("width", wHist)
+        			.attr("height", hHist);
+
+          /*
+           * Axe XS
+           */
+          scaleXHist.domain([d3.min(dataHist, function(d) { return d[attHist]; }),
+                     d3.max(dataHist, function(d) { return d[attHist]; })]);
+             scaleXHist.range([0, wHist-50]);
+
+             gxAxisHist = svgHist.append("g")
+            .call(xAxisHist)
+            .attr("transform","translate(25,"+(hHist-25)+")");
+
+          /*
+           * Création d'un tableau "classes" contenant des objets décrivant chaque classe
+           * Chaque classe est décrite par :
+           * 		- un identifiant ("id")
+           * 		- la position en pixel de la valeur minimale ("minX")
+           * 		- la position en pixel de la valeur maximale ("maxX")
+           *		- l'effectif ("absfrequency")
+           * 		- la densité ("density")
+           */
+
+         //définition des classes
+          classes = [];
+          for(i=0 ; i<nbClasses ; i++){
+            var minX = i*((wHist-50)/nbClasses);
+            var maxX = (i+1)*((wHist-50)/nbClasses);
+            classes[i] = {"id":i, "minX":minX, "maxX":maxX, "absfrequency":0, "density":0};
+          }
+
+         // boucle pour le calcul des densités
+          var maxdensity = 0;
+          for(i=0 ; i<nbClasses ; i++){
+            classes[i].absfrequency = 0;
+            var minV = scaleXHist.invert(classes[i].minX);
+            var maxV = scaleXHist.invert(classes[i].maxX);
+            for(j=0 ; j<dataHist.length ; j++){
+              if(parseFloat(dataHist[j][attHist])>=minV && parseFloat(dataHist[j][attHist])<=maxV){
+                classes[i].absfrequency +=1;
+              }
+            }
+            classes[i].density = classes[i].absfrequency/(maxV-minV);
+            if(classes[i].density>maxdensity) maxdensity = classes[i].density;
+          }
+
+          /*
+           * Axe Y
+           */
+
+          scaleYHist.domain([0, maxdensity]); //borne min et max des données de densité
+             scaleYHist.range([hHist-50,0]); //longueur du segment représentant l'axe y
+
+          gyAxisHist = svgHist.append("g")
+            .call(yAxisHist)
+            .attr("transform","translate(25,25)");
+
+          /*
+           * Bars
+           */
+
+          bars = svgHist.selectAll(".bars")
+            .data(classes)
+            .enter().append("rect");
+
+          bars.attr("stroke", "white")
+            .attr("stroke-width", 1)
+            .attr("fill", "teal")
+            .attr("x", function(d) { return 25+d.minX; })
+            .attr("y", function(d) { return 25+scaleYHist(d.density); })
+            .attr("width", function(d) { return d.maxX-d.minX; })
+            .attr("height", function(d) { return hHist-50-scaleYHist(d.density); });
+         }
+
+         initHistogram(350, 230, json, "score");
+       })
+     }
+   }
 )}
 
+
+
+
 // Post
-sendpostfetch = function(nickname,theme,score,age,sexe)
-{
+sendpostfetch = function(nickname,theme,score,age,sexe){
 	fetch('/score', {
   		method: 'POST',
   		body: JSON.stringify({
