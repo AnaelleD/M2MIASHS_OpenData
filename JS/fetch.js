@@ -23,8 +23,21 @@ fetchSuivant = function (DATA){
 	REPA= DATA[j].reponse
 	REPB= DATA[j].faux1
 	REPC= DATA[j].faux2
-	REP=[REPA,REPB,REPC];
-	TREP=[1,0,0];
+	var ALEA=Math.random();
+	
+	if (ALEA<= 1/3) {
+		REP=[REPA,REPB,REPC];
+		TREP=[1,0,0];
+	}
+	else if (ALEA>=2/3) {
+		REP=[REPB,REPA,REPC];
+		TREP=[0,1,0];
+	}
+	else  {
+		REP=[REPC,REPB,REPA];
+		TREP=[0,0,1];
+	}
+	
 	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
   		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
      ' <span>'+REP[0]+'</span></label>'+
@@ -41,7 +54,7 @@ fetchSuivant = function (DATA){
      
     QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
     "<h1> #"+(j+1)+"</h1>"+
-	'<img src="'+Question+'" height=70px;></img>'+
+	'<img src="'+Question+'" width=300px;></img>'+
 	'</div>';	
 	};
 	QUEST+=form;
