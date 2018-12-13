@@ -20,4 +20,5 @@ function statsPost(theme) {
   }
   sendpostfetch(nickname,theme,score,age,sexe);
   stats(theme);
+	downloadFiles(theme);
 }

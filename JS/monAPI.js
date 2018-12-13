@@ -1,7 +1,12 @@
-// Get
+////////// Get
 sendgetfetch = function(theme)
 {
-  fetch('/score?theme='+theme).then(function(response) {
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+  var myInit = { method: 'GET',
+              headers: myHeaders,
+              cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
     if (!response.ok) {
       console.log("Erreur du get vers /score")
     }
@@ -9,8 +14,11 @@ sendgetfetch = function(theme)
       return response.json().then(function(json) {
         console.log(json)
 
+        //////// Afficher le classement des 10 meilleurs pour ce score :
+        // // TODO NABIL !!!!
 
-        //dessin histogram
+
+        //////// Afficher l'histogramme pour ce score :
        function initHistogram(w, h, d, a) {
          var svgHist = d3.select("#Reponse").append("svg");
           wHist = w;
@@ -135,6 +143,7 @@ sendgetfetch = function(theme)
          }
 
          initHistogram(350, 230, json, "score");
+
        })
      }
    }
@@ -143,7 +152,66 @@ sendgetfetch = function(theme)
 
 
 
-// Post
+// download file to json and xml
+downloadFiles = function(theme)
+{
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+  var myInit = { method: 'GET',
+              headers: myHeaders,
+              cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
+    if (!response.ok) {
+      console.log("Erreur du get vers /score")
+    }
+    else{
+      return response.json().then(function(json) {
+        //console.log(json)
+
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'scores.json';
+        a.innerHTML = '<div>Télécharger en Json</div>';
+
+        var container = document.getElementById('Reponse');
+        container.appendChild(a);
+       })
+     }
+   })
+
+   var myHeaders = new Headers();
+   myHeaders.append("Accept", "text/xml")
+   var myInit = { method: 'GET',
+               headers: myHeaders,
+               cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
+    if (!response.ok) {
+      console.log("Erreur du get vers /score XML")
+    }
+    else{
+      return response.text().then(function(xml) {
+        console.log(xml)
+
+        var data = "text/xml;charset=utf-8," + encodeURIComponent(xml);
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'scores.XML';
+        a.innerHTML = '<div>Télécharger en XML</div>';
+
+        var container = document.getElementById('Reponse');
+        container.appendChild(a);
+
+       })
+     }
+   }
+)}
+
+
+
+
+////////// Post
 sendpostfetch = function(nickname,theme,score,age,sexe){
 	fetch('/score', {
   		method: 'POST',
