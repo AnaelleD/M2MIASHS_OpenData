@@ -1,7 +1,12 @@
-// Get
+////////// Get
 sendgetfetch = function(theme)
 {
-  fetch('/score?theme='+theme).then(function(response) {
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+  var myInit = { method: 'GET',
+              headers: myHeaders,
+              cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
     if (!response.ok) {
       console.log("Erreur du get vers /score")
     }
@@ -9,8 +14,11 @@ sendgetfetch = function(theme)
       return response.json().then(function(json) {
         console.log(json)
 
+        //////// Afficher le classement des 10 meilleurs pour ce score :
+        // // TODO NABIL !!!!
 
-        //dessin histogram
+
+        //////// Afficher l'histogramme pour ce score :
        function initHistogram(w, h, d, a) {
          var svgHist = d3.select("#Reponse").append("svg");
           wHist = w;
@@ -39,6 +47,13 @@ sendgetfetch = function(theme)
         	svgHist.attr("width", wHist)
         			.attr("height", hHist);
 
+          // title
+     		  svgHist.append("text")
+     					.attr("transform",
+     		            "translate(" +(wHist-150)+","+(hHist-210)+")")
+     		      .style("text-anchor", "middle")
+     		      .text(theme);
+
           /*
            * Axe XS
            */
@@ -48,7 +63,14 @@ sendgetfetch = function(theme)
 
              gxAxisHist = svgHist.append("g")
             .call(xAxisHist)
-            .attr("transform","translate(25,"+(hHist-25)+")");
+            .attr("transform","translate(50,"+(hHist-50)+")");
+
+          // text label for the x axis
+  			  svgHist.append("text")
+  						.attr("transform",
+  			            "translate(" +(wHist-150)+","+(hHist-20)+")")
+  			      .style("text-anchor", "middle")
+  			      .text("Score");
 
           /*
            * Création d'un tableau "classes" contenant des objets décrivant chaque classe
@@ -88,11 +110,20 @@ sendgetfetch = function(theme)
            */
 
           scaleYHist.domain([0, maxdensity]); //borne min et max des données de densité
-             scaleYHist.range([hHist-50,0]); //longueur du segment représentant l'axe y
+             scaleYHist.range([hHist-100,0]); //longueur du segment représentant l'axe y
 
           gyAxisHist = svgHist.append("g")
             .call(yAxisHist)
-            .attr("transform","translate(25,25)");
+            .attr("transform","translate(50,50)");
+
+          // text label for the y axis
+    		  svgHist.append("text")
+    		      .attr("transform", "rotate(-90)")
+    		      .attr("y", -0)
+    		      .attr("x", -125)
+    		      .attr("dy", "1em")
+    		      .style("text-anchor", "middle")
+    		      .text("Nombre de joueurs");
 
           /*
            * Bars
@@ -105,13 +136,14 @@ sendgetfetch = function(theme)
           bars.attr("stroke", "white")
             .attr("stroke-width", 1)
             .attr("fill", "teal")
-            .attr("x", function(d) { return 25+d.minX; })
-            .attr("y", function(d) { return 25+scaleYHist(d.density); })
+            .attr("x", function(d) { return 50+d.minX; })
+            .attr("y", function(d) { return 50+scaleYHist(d.density); })
             .attr("width", function(d) { return d.maxX-d.minX; })
-            .attr("height", function(d) { return hHist-50-scaleYHist(d.density); });
+            .attr("height", function(d) { return hHist-100-scaleYHist(d.density); });
          }
 
          initHistogram(350, 230, json, "score");
+
        })
      }
    }
@@ -120,7 +152,66 @@ sendgetfetch = function(theme)
 
 
 
-// Post
+// download file to json and xml
+downloadFiles = function(theme)
+{
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+  var myInit = { method: 'GET',
+              headers: myHeaders,
+              cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
+    if (!response.ok) {
+      console.log("Erreur du get vers /score")
+    }
+    else{
+      return response.json().then(function(json) {
+        //console.log(json)
+
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'scores.json';
+        a.innerHTML = '<div>Télécharger en Json</div>';
+
+        var container = document.getElementById('Reponse');
+        container.appendChild(a);
+       })
+     }
+   })
+
+   var myHeaders = new Headers();
+   myHeaders.append("Accept", "text/xml")
+   var myInit = { method: 'GET',
+               headers: myHeaders,
+               cache: 'default' };
+  fetch('/score?theme='+theme,myInit).then(function(response) {
+    if (!response.ok) {
+      console.log("Erreur du get vers /score XML")
+    }
+    else{
+      return response.text().then(function(xml) {
+        console.log(xml)
+
+        var data = "text/xml;charset=utf-8," + encodeURIComponent(xml);
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'scores.XML';
+        a.innerHTML = '<div>Télécharger en XML</div>';
+
+        var container = document.getElementById('Reponse');
+        container.appendChild(a);
+
+       })
+     }
+   }
+)}
+
+
+
+
+////////// Post
 sendpostfetch = function(nickname,theme,score,age,sexe){
 	fetch('/score', {
   		method: 'POST',

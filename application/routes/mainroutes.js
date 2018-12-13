@@ -5,6 +5,7 @@ const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
 const mongo = require('mongodb')
 //load up the scores model
 const Score = require('../models/score')
+const xmlify = require('xmlify')
 
 module.exports = function(app, express) {
     // get an instance of the router for main routes
@@ -63,22 +64,32 @@ module.exports = function(app, express) {
 
     /////////////// Notre API
     // API Get
-    mainRoutes.get('/score', function(req, res) {
+    mainRoutes.get('/score',function(req, res) {
+      output = req.query.output;
       theme = req.query.theme;
-      Score.find({"theme" : theme},{"nickname": true,
-        "theme": true,
-        "score": true,
-        "age": true,
-        "sexe": true},function(err, scores){
-        if (err){
-            res.send(err);
-        }
-        if (res){
-          res.json(scores);
-          //console.log(scores);
-        }
-      });
-    })
+        Score.find({"theme" : theme},{"nickname": true,
+          "theme": true,
+          "score": true,
+          "age": true,
+          "sexe": true},function(err, scores){
+          if (err){
+              res.send(err);
+          }
+          if (res){
+            //if (output == "json"){
+            // Negociation de contenu :
+            if(req.accepts('application/json')){
+              res.header('Content-Type', 'application/json');
+              res.json(scores);
+            //}else if (output=="xml") {
+            }else if (req.accepts('text/xml')) {
+              var xml = xmlify(scores,{root:'scores',wrapArrays:false})
+              res.header('Content-Type', 'text/xml')
+              res.send(xml)
+            }
+          }});
+      })
+
 
     // API Post
     mainRoutes.post('/score', function(req,res){

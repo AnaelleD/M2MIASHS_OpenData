@@ -31,8 +31,8 @@ fetchSuivant = function (DATA,theme){
       '<div class="form-group"><div class="col-sm-1"></div>'+
       	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="M" checked="checked">Homme</label></div>'+
       	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="F">Femme</label></div></div>'+
-      '<div class="form-group text-center"> ' +
-          '<button  class="btn btn-default" onclick=statsPost("'+theme+'");><span class="glyphicon glyphicon-stats"></span></button>'+
+      '<div class="form-group text-center"> ' + '</br>'+
+          '<button  class="btn btn-default" onclick=statsPost("'+theme+'");>Stats</br><span class="glyphicon glyphicon-stats"></span></button>'+
   		'</div></div> ';
 
 	document.getElementById("doublon").style.visibility="visible";
@@ -44,10 +44,10 @@ fetchSuivant = function (DATA,theme){
 	REPA= DATA[j].reponse
 	REPB= DATA[j].faux1
 	REPC= DATA[j].faux2
-    
+
 
 	var ALEA=Math.random();
-	
+
 	if (ALEA<= 1/3) {
 		REP=[REPA,REPB,REPC];
 		TREP=[1,0,0];
@@ -60,13 +60,11 @@ fetchSuivant = function (DATA,theme){
 		REP=[REPC,REPB,REPA];
 		TREP=[0,0,1];
 	}
-	
+
 	 CHOIX += '<div id="SHOW'+j+'" class="custom-radios" style="visibility: hidden;">'+
   		'<div><input type="radio" id="A" name="color" value="A" onclick=Suivant('+j+','+TREP[0]+')><label for="A">'+
      ' <span>'+REP[0]+'</span></label>'+
-     '</div>'+  
-
-     
+     '</div>'+
      '<div>'+
    		 '<input type="radio" id="B" name="color" value="B" onclick=Suivant('+j+','+TREP[1]+')><label for="B">'+
      ' <span>'+REP[1]+'</span></label>'+
@@ -77,15 +75,14 @@ fetchSuivant = function (DATA,theme){
      '</div>'+
      '</div>';
 
-     
     QUEST+='<div id="SHOW'+10+j+'" style="visibility: hidden";>'+
     "<h1> #"+(j+1)+"</h1>"+
 	'<img src="'+Question+'" width=300px;></img>'+
-	'</div>';	
+	'</div>';
 	};
+
 	QUEST+=form;
 	 CHOIX += '<div id="SHOW10" style="visibility: hidden";><br><h2>Votre score : <span id="SCORE2" class="label label-warning" >0</span></h2></div>';
-	 
 
 	document.getElementById("Question").innerHTML=QUEST;
 	document.getElementById("Reponse").innerHTML=CHOIX;
@@ -94,7 +91,7 @@ fetchSuivant = function (DATA,theme){
 
 }
 
-
+// Appelé par click sur button suivant
 function Suivant (j,REP) {
 	document.getElementById("A").disabled = true;
 	document.getElementById("B").disabled = true;
@@ -119,7 +116,6 @@ function Suivant (j,REP) {
 		document.getElementById("SCORE2").innerHTML=SCORE;
 		}
 	else {document.getElementsByClassName('well-lg')[0].style["background-color"]='red'};
-
 
 	if (j==9) {document.getElementById("doublon").style.visibility="hidden";}
 }
