@@ -12,14 +12,32 @@ sendgetfetch = function(theme)
     }
     else{
       return response.json().then(function(json) {
-        console.log(json)
+        //console.log(json)
 
         //////// Afficher le classement des 10 meilleurs pour ce score :
-        // // TODO NABIL !!!!
-
+        function top10(data) {
+        	document.getElementById("Question").innerHTML="";
+        	data2 = sortJSON(data,'score');
+        	var TOP='<table class="table table-striped"><thead><tr><th>#</th><th>Nickname</th><th>Score</th></tr></thead><tbody>';
+        	for (var i=0;i<10;i++) {
+        		 TOP+="<tr><td>"+(i+1)+"</td><td>"+data2[i].nickname+"</td><td>"+data2[i].score+"</td></tr>";
+        	}
+        	TOP+="</tbody></table>";
+        	document.getElementById("Question").innerHTML=TOP;
+        }
+        function sortJSON(data, key) {
+        	return data.sort(function(a, b) {
+        		var x = a[key]; var y = b[key];
+        		 return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        });
+        }
+        
+		top10(json);
+		
 
         //////// Afficher l'histogramme pour ce score :
        function initHistogram(w, h, d, a) {
+       	document.getElementById("Reponse").innerHTML="";
          var svgHist = d3.select("#Reponse").append("svg");
           wHist = w;
           hHist = h;
@@ -30,8 +48,8 @@ sendgetfetch = function(theme)
           var scaleXHist = d3.scaleLinear();
           var scaleYHist = d3.scaleLinear();
 
-          var xAxisHist = d3.axisBottom(scaleXHist);
-          var yAxisHist = d3.axisLeft(scaleYHist);
+          var xAxisHist = d3.axisBottom(scaleXHist).tickValues([1,2,3,4,5,6,7,8,9,10]);
+          var yAxisHist = d3.axisLeft(scaleYHist).ticks(2);
 
           var gxAxisHist;
           var gyAxisHist;
@@ -57,18 +75,17 @@ sendgetfetch = function(theme)
           /*
            * Axe XS
            */
-          scaleXHist.domain([d3.min(dataHist, function(d) { return d[attHist]; }),
-                     d3.max(dataHist, function(d) { return d[attHist]; })]);
-             scaleXHist.range([0, wHist-50]);
+          scaleXHist.domain([1,10]);
+             scaleXHist.range([0, wHist-120]);
 
              gxAxisHist = svgHist.append("g")
             .call(xAxisHist)
-            .attr("transform","translate(50,"+(hHist-50)+")");
+            .attr("transform","translate(70,"+(hHist-52)+")");
 
           // text label for the x axis
   			  svgHist.append("text")
   						.attr("transform",
-  			            "translate(" +(wHist-150)+","+(hHist-20)+")")
+  			            "translate(" +(wHist-140)+","+(hHist-20)+")")
   			      .style("text-anchor", "middle")
   			      .text("Score");
 
@@ -136,13 +153,13 @@ sendgetfetch = function(theme)
           bars.attr("stroke", "white")
             .attr("stroke-width", 1)
             .attr("fill", "teal")
-            .attr("x", function(d) { return 50+d.minX; })
+            .attr("x", function(d) { return 60+d.minX; })
             .attr("y", function(d) { return 50+scaleYHist(d.density); })
             .attr("width", function(d) { return d.maxX-d.minX; })
-            .attr("height", function(d) { return hHist-100-scaleYHist(d.density); });
+            .attr("height", function(d) { return hHist-100-scaleYHist(d.density); })
          }
 
-         initHistogram(350, 230, json, "score");
+         initHistogram(500, 230, json, "score");
 
        })
      }

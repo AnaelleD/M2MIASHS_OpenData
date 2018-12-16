@@ -32,8 +32,17 @@
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Monument');">Monument</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Flag');">Drapeau</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Games');">Jeux Vidéo</button>
-    </br></br>
-      <button type="button" class="btn btn-default" onclick="stats('Sport');stats('Cinema');stats('Flag');stats('Games');stats('Monument');">Stats</br><span class="glyphicon glyphicon-stats"></span></button>
+      
+    <div class="btn-group">
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"> Stats<span class="glyphicon glyphicon-stats"></span><span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a onclick="stats('Sport')">Sport</a></li>
+      <li><a onclick="stats('Cinema')">Cinema</a></li>
+      <li><a onclick="stats('Monument')">Monument</a></li>
+      <li><a onclick="stats('Flag')">Drapeau</a></li>
+       <li><a onclick="stats('Games')">Jeux vidéo</a></li>
+    </ul>
+  </div>
     </div>
 
 
