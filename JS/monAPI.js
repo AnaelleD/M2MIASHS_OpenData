@@ -31,9 +31,9 @@ sendgetfetch = function(theme)
         		 return ((x > y) ? -1 : ((x < y) ? 1 : 0));
         });
         }
-        
+
 		top10(json);
-		
+
 
         //////// Afficher l'histogramme pour ce score :
        function initHistogram(w, h, d, a) {
@@ -209,7 +209,7 @@ downloadFiles = function(theme)
     }
     else{
       return response.text().then(function(xml) {
-        console.log(xml)
+        //console.log(xml)
 
         var data = "text/xml;charset=utf-8," + encodeURIComponent(xml);
         var a = document.createElement('a');

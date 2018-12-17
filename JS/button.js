@@ -24,14 +24,14 @@ var SCORE=0;
 // Appelée dans fetch${theme}. Initialisation question / reponses
 fetchSuivant = function (DATA,theme){
   var form='<div id="SHOW1010" style="visibility: hidden";><h2 class="text-center">Bravo ! </br> Remplissez le formulaire pour visualiser vos stats.</h2>'+
-      '<div class="form-group"><label class="control-label col-sm-2" for="email">Nickname</label>'+
-  		'<div class="col-sm-4"><input type="text" class="form-control" id="name" name="name"></div></div>'+
-      '<div class="form-group"><label class="control-label col-sm-2" for="email">Age</label>'+
-  		'<div class="col-sm-3"><input type="number" class="form-control" id="age" name="age" value=25></div></div>'+
-      '<div class="form-group"><div class="col-sm-1"></div>'+
-      	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="M" checked="checked">Homme</label></div>'+
-      	'<div class="radio col-sm-2"><label><input type="radio" name="optradio" value="F">Femme</label></div></div>'+
-      '<div class="form-group text-center"> ' + '</br>'+
+      '<div class="form-group"><label class="control-label" for="email">Nickname</label>'+
+  		'<input type="text" class="form-control" id="name" name="name"></div>'+
+      '<div class="form-group"><label class="control-label" for="email">Age</label>'+
+  		'<input type="number" class="form-control" id="age" name="age" value=25></div>'+
+      '<div class="form-group">'+
+      	'<div class="radio"><label><input type="radio" name="optradio" value="M" checked="checked">Homme</label></div>'+
+      	'<div class="radio"><label><input type="radio" name="optradio" value="F">Femme</label></div>'+
+      '<div class="form-group text-center"></br>'+
           '<button  class="btn btn-default" onclick=statsPost("'+theme+'");>Stats</br><span class="glyphicon glyphicon-stats"></span></button>'+
   		'</div></div> ';
 

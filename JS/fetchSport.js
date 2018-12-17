@@ -24,10 +24,12 @@ fetchSport = function(){
           var teamListe = []
           var blasonListe = []
           for(team in jsonListe){
-            if(jsonListe[team].strTeamJersey !== null){ // Pour ceux qui ont un badge non null
-              if(jsonListe[team].strTeamJersey.length > 0){ // Pour ceux qui ont un badge avec un chemin renseigné
-                teamListe.push(jsonListe[team].strTeam)
-                blasonListe.push(jsonListe[team].strTeamJersey)
+            if(jsonListe[team].strTeam !== null){ // Pour ceux qui ont une team renseignée
+              if(jsonListe[team].strTeamJersey !== null){ // Pour ceux qui ont un badge non null
+                if(jsonListe[team].strTeamJersey.length > 0){ // Pour ceux qui ont un badge avec un chemin renseigné
+                  teamListe.push(jsonListe[team].strTeam)
+                  blasonListe.push(jsonListe[team].strTeamJersey)
+                }
               }
             }
           }
@@ -43,10 +45,9 @@ fetchSport = function(){
             var teamListeSubId =  [...Array(teamListe.length).keys()];
             teamListeSubId.splice(listeId[i], 1); // On enleve la bonne reponse
             var lesFaux = getRandomArbitrary(teamListeSubId,2) // Selection de 2 faux
-            listeFaux1.push(teamListeSubId[lesFaux[0]])
-            listeFaux2.push(teamListeSubId[lesFaux[1]])
+            listeFaux1.push(lesFaux[0])
+            listeFaux2.push(lesFaux[1])
           }
-
           // Mise en place du JsonArray
           var jsonArray = []
           for (i = 0; i < listeId.length; i++) {

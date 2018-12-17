@@ -32,30 +32,31 @@
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Monument');">Monument</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Flag');">Drapeau</button>
       <button type="button" class="btn btn-default"  onclick="fetchBoutton('Games');">Jeux Vidéo</button>
-      
-    <div class="btn-group">
-    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"> Stats<span class="glyphicon glyphicon-stats"></span><span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a onclick="stats('Sport')">Sport</a></li>
-      <li><a onclick="stats('Cinema')">Cinema</a></li>
-      <li><a onclick="stats('Monument')">Monument</a></li>
-      <li><a onclick="stats('Flag')">Drapeau</a></li>
-       <li><a onclick="stats('Games')">Jeux vidéo</a></li>
-    </ul>
-  </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"> Stats<span class="glyphicon glyphicon-stats"></span><span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a onclick="stats('Sport')">Sport</a></li>
+          <li><a onclick="stats('Cinema')">Cinema</a></li>
+          <li><a onclick="stats('Monument')">Monument</a></li>
+          <li><a onclick="stats('Flag')">Drapeau</a></li>
+           <li><a onclick="stats('Games')">Jeux vidéo</a></li>
+        </ul>
+      </div>
+      <h3 style="color:white">Puis trouvez la réponse qui correspond à l'image !</h3>
     </div>
 
 
     <h2 id="doublon" style="margin-left:10% ;color:white">Score : <span id="SCORE" class="label label-warning" >0</span></h2>
-    <div class="container">
-      <div class="well well-lg">
+    <div class="container" style="max-height:600px">
+      <div class="well well-lg" style="max-height:600px">
         <div class="row">
 
-          <div class="col-sm-6">
+          <div class="col-sm-6" style="max-height:600px">
             <div id="Question"></div>
           </div>
 
-          <div class="col-sm-6">
+          <div class="col-sm-6" style="max-height:600px">
             <br>
             <div id="Reponse"></div>
           </div>
@@ -95,7 +96,6 @@
   background-color: lightblue;
   height: 50px;
   display: inline-block;
-
 }
   </style>
 
