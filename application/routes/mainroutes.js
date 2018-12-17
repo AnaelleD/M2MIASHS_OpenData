@@ -1,6 +1,6 @@
 const request = require('request')
 const fs = require('fs')
-const film = require('../../JS/themefilm.js') // appeler le fichier themefilm.js
+const film = require('../../JS/themeFilm.js') // appeler le fichier themefilm.js
 
 const mongo = require('mongodb')
 //load up the scores model
