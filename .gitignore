@@ -1,1 +1,11 @@
 node_modules/
+
+package-lock.json
+
+application/.DS_Store
+
+view/.DS_Store
+
+JS/.DS_Store
+
+application/routes/.DS_Store

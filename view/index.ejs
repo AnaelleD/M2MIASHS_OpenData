@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Culture G ou G pas</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/button"></script>
+    <script src="/fetchSport"></script>
+    <script src="/fetchMonument"></script>
+    <script src="/fetchCinema"></script>
+    <script src="/fetchFlag"></script>
+    <script src="/fetchGames"></script>
+    <script src="/monAPI"></script>
+    <script src="/stats"></script>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+  </head>
+
+  <body style="background-color:#2d2d30" >
+
+    <div class="jumbotron text-center">
+      <h1>Culture G ou G pas ?</h1>
+      <p>Questions de culture génerale</p>
+    </div>
+
+    <div class="text-center">
+      <h2 style="color:white">Choississez un thème : </h2>
+      <button type="button" class="btn btn-default" onclick="fetchBoutton('Sport');">Sport</button>
+      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Cinema');">Cinema</button>
+      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Monument');">Monument</button>
+      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Flag');">Drapeau</button>
+      <button type="button" class="btn btn-default"  onclick="fetchBoutton('Games');">Jeux Vidéo</button>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"> Stats<span class="glyphicon glyphicon-stats"></span><span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a onclick="stats('Sport')">Sport</a></li>
+          <li><a onclick="stats('Cinema')">Cinema</a></li>
+          <li><a onclick="stats('Monument')">Monument</a></li>
+          <li><a onclick="stats('Flag')">Drapeau</a></li>
+           <li><a onclick="stats('Games')">Jeux vidéo</a></li>
+        </ul>
+      </div>
+      <h3 style="color:white">Puis trouvez la réponse qui correspond à l'image !</h3>
+    </div>
+
+
+    <h2 id="doublon" style="margin-left:10% ;color:white">Score : <span id="SCORE" class="label label-warning" >0</span></h2>
+    <div class="container" style="max-height:600px">
+      <div class="well well-lg" style="max-height:600px">
+        <div class="row">
+
+          <div class="col-sm-6" style="max-height:600px">
+            <div id="Question"></div>
+          </div>
+
+          <div class="col-sm-6" style="max-height:600px">
+            <br>
+            <div id="Reponse"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+  <style>
+  .custom-radios input[type="radio"] {
+  display: none;
+	}
+	.custom-radios input[type="radio"] + label {
+  color: lightgrey;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+	}
+  .custom-radios input[type="radio"] + label span {
+  display: inline-block;
+  height: 50px;
+  width: 450px;
+  margin: -1px 50px 10px 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  text-align: center;
+  line-height: 44px;
+  background-color: #2d2d30;
+	}
+  .custom-radios input[type="radio"]:checked + label span {
+  color: black;
+  opacity: 1;
+  background-color: lightblue;
+  height: 50px;
+  display: inline-block;
+}
+  </style>
+
+</html>
