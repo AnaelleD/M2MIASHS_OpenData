@@ -184,6 +184,13 @@ module.exports = function(app, express) {
      res.end()
   })
   })
+  mainRoutes.get('/d3', function(req, res) {
+      fs.readFile("JS/d3.js", function(err, data) {
+       res.writeHead(200, {'Content-Type': 'text/plain'})
+       res.write(data)
+       res.end()
+    })
+  })
 
 	/////////////// apply the routes to our application
     app.use('/', mainRoutes)
