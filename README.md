@@ -20,4 +20,4 @@ Les données sont collectées de :
 - https://query.wikidata.org/
 - https://restcountries.eu/
 
-En utilisant la route GET /score/ vous pouvez récupérer les données des scores en JSon 'application/json' ou en XML 'text/xml'.
+En utilisant la route GET /score?theme=votretheme vous pouvez récupérer les données des scores en JSon ('Accept':'application/json') ou en XML ('Accept':'text/xml'). Choississez "votretheme" parmi : {Sport, Cinema, Monument, Flag, Games}.
